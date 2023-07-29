@@ -1,0 +1,108 @@
+require('prototype.spawn')();
+var roleHarvester = require('role.harvester');
+var roleUpgrader = require('role.upgrader');
+var roleRepairer = require('role.repairer');
+var roleBuilder = require('role.builder');
+var roleWallRepairer = require('role.wallRepairer');
+var roleLongDistanceHarvester = require('role.longDistanceHarvester');
+var roleLongDistanceBuilder = require('role.longDistanceBuilder');
+
+var HOME = 'E17N5';
+
+module.exports.loop = function () {
+    for (let name in Memory.creeps) {
+        if (Game.creeps[name] == undefined) {
+            delete Memory.creeps[name];
+        }
+    }
+
+    for (let spawnName in Game.spawns) {
+        var spawn = Game.spawns[spawnName];
+
+        var creepInRoom = spawn.room.find(FIND_MY_CREEPS);
+
+        var harvesters = _.sum(creepInRoom, (c) => c.memory.role == 'harvester');
+        var maxHarvesters = spawn.memory.maxHarvesters;
+
+        var upgraders = _.sum(creepInRoom, (c) => c.memory.role == 'upgrader');
+        var maxUpgraders = spawn.memory.maxUpgraders;
+
+        var repairers = _.sum(creepInRoom, (c) => c.memory.role == 'repairer');
+        var maxRepairers = spawn.memory.maxRepairers;
+
+        var builders = _.sum(creepInRoom, (c) => c.memory.role == 'builder');
+        var maxBuilders = spawn.memory.maxBuilders;
+
+        var longDistanceHarvesters = _.sum(Game.creeps, (c) => c.memory.role == 'longDistanceHarvester');
+        var maxLongDistanceHarvesters = spawn.memory.maxLongDistanceHarvesters;
+
+        var longDistanceBuilders = _.sum(Game.creeps, (c) => c.memory.role == 'longDistanceBuilder');
+        var maxLongDistanceBuilders = spawn.memory.maxLongDistanceBuilders;
+
+        var wallRepairers = _.sum(creepInRoom, (c) => c.memory.role == 'wallRepairer');
+        var maxWallRepairers = spawn.memory.maxWallRepairers;
+
+        var energy = spawn.room.energyCapacityAvailable;
+
+        if (harvesters < maxHarvesters) {
+            var newName = 'Harvester' + Game.time;
+            spawn = spawn.spawnCustomCreep(energy, newName, 'harvester');
+            if (harvesters == 0 && spawn == ERR_NOT_ENOUGH_ENERGY) {
+                Game.spawns['Spawn1'].spawnCustomCreep(spawn.room.energyAvailable, newName, 'harvester');
+            }
+        } else if (longDistanceHarvesters < maxLongDistanceHarvesters) {
+            var newName = 'LongDistanceHarvester' + Game.time;
+            spawn.spawnLongDistanceCreep(energy, newName, 5, HOME, 'E17N6', 0, 'longDistanceHarvester');
+        } else if (longDistanceBuilders < maxLongDistanceBuilders) {
+            var newName = 'LongDistanceBuilder' + Game.time;
+            spawn.spawnLongDistanceCreep(energy, newName, 6, HOME, 'E17N6', 0, 'longDistanceBuilder')
+        } else if (upgraders < maxUpgraders) {
+            var newName = 'Upgrader' + Game.time;
+            spawn.spawnCustomCreep(energy, newName, 'upgrader');
+        } else if (builders < maxBuilders) {
+            var newName = 'Builder' + Game.time;
+            spawn.spawnCustomCreep(energy, newName, 'builder');
+        } else if (repairers < maxRepairers) {
+            var newName = 'Repairer' + Game.time;
+            spawn.spawnCustomCreep(energy, newName, 'repairer');
+        } else if (wallRepairers < maxWallRepairers) {
+            var newName = 'WallRepairer' + Game.time;
+            spawn.spawnCustomCreep(energy, newName, 'wallRepairer')
+        }
+    }
+
+    for (var name in Game.creeps) {
+        var creep = Game.creeps[name];
+
+        if (creep.store.energy == 0 && creep.memory.working) {
+            creep.memory.working = false;
+        }
+
+        if (creep.store.energy == creep.store.getCapacity(RESOURCE_ENERGY) && !creep.memory.working) {
+            creep.memory.working = true;
+        }
+
+        switch (creep.memory.role) {
+            case 'builder': roleBuilder.run(creep); break;
+            case 'upgrader': roleUpgrader.run(creep); break;
+            case 'repairer': roleRepairer.run(creep); break;
+            case 'harvester': roleHarvester.run(creep); break;
+            case 'wallRepairer': roleWallRepairer.run(creep); break;
+            case 'longDistanceBuilder': roleLongDistanceBuilder.run(creep); break;
+            case 'longDistanceHarvester': roleLongDistanceHarvester.run(creep); break;
+        }
+    }
+
+    var towers = Game.rooms[HOME].find(FIND_STRUCTURES, { filter: (s) => s.structureType == STRUCTURE_TOWER });
+    for (let tower of towers) {
+        var target = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
+        if (target) {
+            tower.attack(target);
+        }
+
+        var heal = tower.pos.findClosestByPath(FIND_MY_CREEPS, { filter: (c) => c.hits < c.hitsMax });
+        if (!target && heal) {
+            tower.heal(heal);
+        }
+    }
+}
