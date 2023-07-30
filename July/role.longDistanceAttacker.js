@@ -1,7 +1,6 @@
 var roleLongDistanceAttacker = {
     
     run:function(creep) {
-        console.log('ok')
         if(creep.room.name == creep.memory.target) {
             console.log(creep.memory.target)
             var closestHostileCreep = creep.pos.findClosestByPath(FIND_HOSTILE_CREEPS);
@@ -9,9 +8,13 @@ var roleLongDistanceAttacker = {
             console.log(closestHostileCreep);
             console.log(closestHostileStructure);
             if(closestHostileCreep) {
-                creep.attack(closestHostileCreep);
+                if(creep.attack(closestHostileCreep) == ERR_NOT_IN_RANGE) {
+                    creep.moveTo(closestHostileCreep)
+                }
             } else if(closestHostileStructure) {
-                creep.attack(closestHostileStructure);
+                if(creep.attack(closestHostileStructure) == ERR_NOT_IN_RANGE){
+                    creep.moveTo(closestHostileStructure);
+                }
             }
         } else {
             var exit = creep.room.findExitTo(creep.memory.target);
