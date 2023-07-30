@@ -68,4 +68,9 @@ module.exports = function () {
                 }
             })
         };
+
+    StructureSpawn.prototype.spawnMiner = 
+        function (name, sourceId) {
+            return this.spawnCreep([WORK, WORK, WORK, WORK, WORK, MOVE, MOVE, MOVE], name, {memory: {role: 'miner', sourceIndex: sourceId}});
+        }
 };

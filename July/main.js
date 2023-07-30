@@ -48,12 +48,34 @@ module.exports.loop = function () {
 
         var energy = spawn.room.energyCapacityAvailable;
 
+        if (harvesters == 0 && (miners == 0 || lorries == 0)) {
+            if(miners > 0) {
+                spawn.spawnLorry(spawn.room.energyAvailable, 'Lorry');
+            } else {
+                spawn.spawnCustomCreep(energy, 'Harvester', 'harvester');
+            }
+        } else {
+            let sources = spawn.room.find(FIND_SOURCES);
+
+            for(let source of sources) {
+                if(_.some(creepInRoom, c => c.memory.role == 'miner' && c.memory.sourceId == source.id)) {
+                    let containers = source.pos.findInRange(FIND_STRUCTURES, 1, {
+                        filter: s => s.structureType == STRUCTURE_CONTAINER
+                    });
+                    if (containers.length > 0) {
+                        spawn.spawnMiner('Miner' + Game.time, source.id);
+                        break;
+                    }
+                }
+            }
+        }
+
         if (harvesters < maxHarvesters) {
             var newName = 'Harvester' + Game.time;
-            spawn = spawn.spawnCustomCreep(energy, newName, 'harvester');
-            if (harvesters == 0 && spawn == ERR_NOT_ENOUGH_ENERGY) {
-                Game.spawns['Spawn1'].spawnCustomCreep(spawn.room.energyAvailable, newName, 'harvester');
-            }
+            spawn.spawnCustomCreep(energy, newName, 'harvester');
+        } else if (lorries < maxLorries) {
+            var newName = 'Lorry' + Game.time;
+            spawn.spawnLorry(energy, newName)
         } else if (upgraders < maxUpgraders) {
             var newName = 'Upgrader' + Game.time;
             spawn.spawnCustomCreep(energy, newName, 'upgrader');
