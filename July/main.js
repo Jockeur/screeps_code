@@ -56,7 +56,7 @@ module.exports.loop = function () {
 
         if (harvesters == 0 && (miners == 0 || lorries == 0)) {
             // if there are still miners left
-            if (lorries > 0) {
+            if (miners > 0) {
                 // create a lorry
                 name = spawn.createLorry(spawn.room.energyAvailable);
             }
