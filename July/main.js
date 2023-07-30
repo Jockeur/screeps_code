@@ -55,21 +55,33 @@ module.exports.loop = function () {
         var energy = spawn.room.energyCapacityAvailable;
 
         if (harvesters == 0 && (miners == 0 || lorries == 0)) {
-            if(miners > 0) {
-                spawn.spawnLorry(spawn.room.energyAvailable, 'Lorry');
-            } else {
-                spawn.spawnCustomCreep(energy, 'Harvester', 'harvester');
+            // if there are still miners left
+            if (lorries > 0) {
+                // create a lorry
+                name = spawn.createLorry(spawn.room.energyAvailable);
             }
-        } else {
+            // if there is no miner left
+            else {
+                // create a harvester because it can work on its own
+                name = spawn.createCustomCreep(spawn.room.energyAvailable, 'harvester');
+            }
+        }
+        // if no backup creep is required
+        else {
+            // check if all sources have miners
             let sources = spawn.room.find(FIND_SOURCES);
-
-            for(let source of sources) {
-                if(_.some(creepInRoom, c => c.memory.role == 'miner' && c.memory.sourceId == source.id)) {
+            // iterate over all sources
+            for (let source of sources) {
+                // if the source has no miner
+                if (!_.some(creepsInRoom, c => c.memory.role == 'miner' && c.memory.sourceId == source.id)) {
+                    // check whether or not the source has a container
                     let containers = source.pos.findInRange(FIND_STRUCTURES, 1, {
                         filter: s => s.structureType == STRUCTURE_CONTAINER
                     });
+                    // if there is a container next to the source
                     if (containers.length > 0) {
-                        spawn.spawnMiner('Miner' + Game.time, source.id);
+                        // spawn a miner
+                        name = spawn.createMiner(source.id);
                         break;
                     }
                 }
