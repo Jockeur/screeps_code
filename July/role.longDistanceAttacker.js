@@ -16,6 +16,4 @@ var roleLongDistanceAttacker = {
     }
 }
 
-module.exports = {
-
-};
+module.exports = roleLongDistanceAttacker;
