@@ -81,7 +81,7 @@ module.exports = function () {
             // create a body with twice as many CARRY as MOVE parts
             var numberOfParts = Math.floor(energy / 150);
             var body = [];
-            for (let i = 0; i < numberOfParts * 2; i++) {
+            for (let i = 0; i < numberOfParts; i++) {
                 body.push(CARRY);
             }
             for (let i = 0; i < numberOfParts; i++) {
