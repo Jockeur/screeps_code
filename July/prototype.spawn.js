@@ -90,5 +90,6 @@ module.exports = function () {
 
             // create creep with the created body and the role 'lorry'
             return this.spawnCreep(body, undefined, { role: 'lorry', working: false });
+            console.log(this.spawnCreep(body, undefined, { role: 'lorry', working: false }))
         };
 };
