@@ -45,19 +45,21 @@ module.exports = function () {
         };
 
     StructureSpawn.prototype.spawnAttacker =
-        function (energy, name, role, target) {
+        function (energy, nbAttackParts, name, role, target) {
             var body = [];
-            var nbParts = Math.floor(energy / 280)
-            for (let i = 0; i < nbParts; i++) {
+            
+            for (let i = 0; i < nbAttackParts / 2; i++) {
                 body.push(RANGED_ATTACK);
             }
-            for (let i = 0; i < nbParts; i++) {
+            for (let i = 0; i < nbAttackParts / 2; i++) {
                 body.push(ATTACK);
             }
-            for (let i = 0; i < nbParts; i++) {
+
+            var nbMoveParts = Math.floor(energy - nbAttackParts * 230)
+            for (let i = 0; i < nbMoveParts; i++) {
                 body.push(MOVE);
             }
-            
+
             return this.spawnCreep(body, name, {
                 memory:
                 {
