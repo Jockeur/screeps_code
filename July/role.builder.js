@@ -2,9 +2,9 @@ roleUpgrader = require('role.upgrader');
 var roleBuilder = {
     run: function(creep) {
         if(!creep.memory.working) {
-            var source = creep.room.find(FIND_SOURCES);
-            if(creep.harvest(source[1]) == ERR_NOT_IN_RANGE){
-                creep.moveTo(source[1]);
+            var container = creep.pos.findClosestByPath(FIND_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_CONTAINER})
+            if (creep.withdraw(container, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                creep.moveTo(container);
             }
         } else {
             site = creep.pos.findClosestByPath(FIND_CONSTRUCTION_SITES);
