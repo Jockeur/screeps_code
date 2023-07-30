@@ -64,8 +64,14 @@ module.exports.loop = function () {
             var newName = 'Repairer' + Game.time;
             spawn.spawnCustomCreep(energy, newName, 'repairer');
         } else if(longDistanceAttackers < maxLongDistanceAttackers){
-            var newName = 'longDistanceAttacker' + Game.time;
+            var newName = 'LDA' + Game.time;
             spawn.spawnAttacker(energy, 2, newName, 'longDistanceAttacker', 'E17N6');
+        } else if (longDistanceHarvesters < maxLongDistanceHarvesters) {
+            var newName = 'LDH' + Game.time;
+            spawn.spawnLongDistanceCreep(energy, newName, 4, spawn.room.name, 'E17N6', 0, 'longDistanceHarvester');
+        } else if(longDistanceBuilders < maxLongDistanceBuilders){
+            var newName = 'LDB' + Game.time;
+            spawn.spawnLongDistanceCreep(energy, newName, 4, spawn.room.name, 'E17N6', 0, 'longDistanceBuilder');
         } else if (wallRepairers < maxWallRepairers) {
             var newName = 'WallRepairer' + Game.time;
             spawn.spawnCustomCreep(energy, newName, 'wallRepairer')
