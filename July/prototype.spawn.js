@@ -55,7 +55,7 @@ module.exports = function () {
                 body.push(ATTACK);
             }
 
-            var nbMoveParts = Math.floor(energy - (nbAttackParts * 230))
+            var nbMoveParts = Math.floor((energy - nbAttackParts * 230) /50)
             for (let i = 0; i < nbMoveParts; i++) {
                 body.push(MOVE);
             }
