@@ -4,6 +4,7 @@ var roleUpgrader = require('role.upgrader');
 var roleRepairer = require('role.repairer');
 var roleBuilder = require('role.builder');
 var roleLorry = require('role.lorry');
+var roleMiner = require('role.miner');
 var roleWallRepairer = require('role.wallRepairer');
 var roleLongDistanceBuilder = require('role.longDistanceBuilder');
 var roleLongDistanceAttacker = require('role.longDistanceAttacker');
@@ -130,8 +131,9 @@ module.exports.loop = function () {
         }
 
         switch (creep.memory.role) {
-            case 'builder': roleBuilder.run(creep); break;
+            case 'miner': roleMiner.run(creep); break;
             case 'lorry': roleLorry.run(creep); break;
+            case 'builder': roleBuilder.run(creep); break;
             case 'upgrader': roleUpgrader.run(creep); break;
             case 'repairer': roleRepairer.run(creep); break;
             case 'harvester': roleHarvester.run(creep); break;
