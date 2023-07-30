@@ -1,12 +1,17 @@
 var roleLongDistanceAttacker = {
     
     run:function(creep) {
-        var closestHostile= creep.pos.findClosestByPath(FIND_HOSTILE_STRUCTURES);
-        var closestCreep = creep.pos.findClosestByPath(FIND_HOSTILE_CREEPS);
-        if(closestHostile) {
-            creep.attack(closestHostile);
-        } else if(closestCreep){
-            creep.
+        if(creep.memory.target == creep.room.name) {
+            var closestHostileCreep = creep.pos.findClosestByPath(FIND_HOSTILE_CREEPS);
+            var closestHostileStructure = creep.pos.findClosestByPath(FIND_HOSTILE_STRUCTURES);
+            if(closestHostileCreep) {
+                creep.attack(closestHostileCreep);
+            } else if(closestHostileStructure) {
+                creep.attack(closestHostileStructure);
+            }
+        } else {
+            var exit = creep.room.findExitTo(creep.memory.target);
+            creep.moveTo(creep.pos.findClosestByRange(exit), {visualizePathStyle: {stroke: '#0CFF00'}});
         }
     }
 }

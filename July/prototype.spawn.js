@@ -43,4 +43,26 @@ module.exports = function () {
                 }
             })
         };
+
+    StructureSpawn.prototype.spawnAttacker =
+        function (energy, name, role, target) {
+            var body = [];
+            var nbParts = Math.floor(energy / 280)
+            for (let i = 0; i < nbParts; i++) {
+                body.push(RANGED_ATTACK);
+            }
+            for (let i = 0; i < nbParts; i++) {
+                body.push(ATTACK);
+            }
+            for (let i = 0; i < nbParts; i++) {
+                body.push(MOVE);
+            }
+
+            return this.spawnCreep(body, name, {
+                memory: {
+                    role: role,
+                    target: target
+                }
+            })
+        };
 };

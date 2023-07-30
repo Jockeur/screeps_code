@@ -4,8 +4,9 @@ var roleUpgrader = require('role.upgrader');
 var roleRepairer = require('role.repairer');
 var roleBuilder = require('role.builder');
 var roleWallRepairer = require('role.wallRepairer');
-var roleLongDistanceHarvester = require('role.longDistanceHarvester');
 var roleLongDistanceBuilder = require('role.longDistanceBuilder');
+var roleLongDistanceAttacker = require('role.longDistanceAttacker');
+var roleLongDistanceHarvester = require('role.longDistanceHarvester');
 
 var HOME = 'E17N5';
 
@@ -39,6 +40,9 @@ module.exports.loop = function () {
         var longDistanceBuilders = _.sum(Game.creeps, (c) => c.memory.role == 'longDistanceBuilder');
         var maxLongDistanceBuilders = spawn.memory.maxLongDistanceBuilders;
 
+        var longDistanceAttackers = _.sum(Game.creeps, (c) => c.memory.role == 'longDistanceAttackers');
+        var maxLongDistanceAttackers = spawn.memory.maxLongDistanceAttackers;
+
         var wallRepairers = _.sum(creepInRoom, (c) => c.memory.role == 'wallRepairer');
         var maxWallRepairers = spawn.memory.maxWallRepairers;
 
@@ -50,12 +54,6 @@ module.exports.loop = function () {
             if (harvesters == 0 && spawn == ERR_NOT_ENOUGH_ENERGY) {
                 Game.spawns['Spawn1'].spawnCustomCreep(spawn.room.energyAvailable, newName, 'harvester');
             }
-        } else if (longDistanceHarvesters < maxLongDistanceHarvesters) {
-            var newName = 'LongDistanceHarvester' + Game.time;
-            spawn.spawnLongDistanceCreep(energy, newName, 5, HOME, 'E17N6', 0, 'longDistanceHarvester');
-        } else if (longDistanceBuilders < maxLongDistanceBuilders) {
-            var newName = 'LongDistanceBuilder' + Game.time;
-            spawn.spawnLongDistanceCreep(energy, newName, 6, HOME, 'E17N6', 0, 'longDistanceBuilder')
         } else if (upgraders < maxUpgraders) {
             var newName = 'Upgrader' + Game.time;
             spawn.spawnCustomCreep(energy, newName, 'upgrader');
@@ -65,6 +63,9 @@ module.exports.loop = function () {
         } else if (repairers < maxRepairers) {
             var newName = 'Repairer' + Game.time;
             spawn.spawnCustomCreep(energy, newName, 'repairer');
+        } else if(longDistanceAttackers < maxLongDistanceAttackers){
+            var newName = 'longDistanceAttacker' + Game.time;
+            spawn.spawnAttacker(energy, newName, 'longDistanceAttacker', HOME, 'E17N6');
         } else if (wallRepairers < maxWallRepairers) {
             var newName = 'WallRepairer' + Game.time;
             spawn.spawnCustomCreep(energy, newName, 'wallRepairer')
@@ -89,6 +90,7 @@ module.exports.loop = function () {
             case 'harvester': roleHarvester.run(creep); break;
             case 'wallRepairer': roleWallRepairer.run(creep); break;
             case 'longDistanceBuilder': roleLongDistanceBuilder.run(creep); break;
+            case 'longDistanceAttacker': roleLongDistanceAttacker.run(creep); break;
             case 'longDistanceHarvester': roleLongDistanceHarvester.run(creep); break;
         }
     }
