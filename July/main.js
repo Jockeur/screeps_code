@@ -58,12 +58,12 @@ module.exports.loop = function () {
             // if there are still miners left
             if (miners > 0) {
                 // create a lorry
-                name = spawn.createLorry(spawn.room.energyAvailable);
+                spawn.createLorry(spawn.room.energyAvailable);
             }
             // if there is no miner left
             else {
                 // create a harvester because it can work on its own
-                name = spawn.createCustomCreep(spawn.room.energyAvailable, 'harvester');
+                spawn.createCustomCreep(spawn.room.energyAvailable, 'harvester');
             }
         }
         // if no backup creep is required
