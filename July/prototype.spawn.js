@@ -48,10 +48,10 @@ module.exports = function () {
         function (energy, nbAttackParts, name, role, target) {
             var body = [];
             
-            for (let i = 0; i < nbAttackParts / 2; i++) {
+            for (let i = 0; i < nbAttackParts; i++) {
                 body.push(RANGED_ATTACK);
             }
-            for (let i = 0; i < nbAttackParts / 2; i++) {
+            for (let i = 0; i < nbAttackParts; i++) {
                 body.push(ATTACK);
             }
 
