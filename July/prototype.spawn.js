@@ -60,7 +60,8 @@ module.exports = function () {
 
             console.log(name);
             return this.spawnCreep(body, name, {
-                memory: {
+                memory:
+                {
                     role: role,
                     target: target
                 }
