@@ -89,6 +89,6 @@ module.exports = function () {
             }
 
             // create creep with the created body and the role 'lorry'
-            return this.spawnCreep(body, 'lorry' + Game.time, { role: 'lorry', working: false });
+            return this.spawnCreep(body, 'lorry' + Game.time, {memory:{ role: 'lorry', working: false }});
         };
 };
