@@ -63,7 +63,7 @@ module.exports.loop = function () {
             // if there is no miner left
             else {
                 // create a harvester because it can work on its own
-                spawn.createCustomCreep(spawn.room.energyAvailable, 'harvester');
+                spawn.spawCustomCreep(spawn.room.energyAvailable, 'harvester', 'harvester');
             }
         }
         // if no backup creep is required
