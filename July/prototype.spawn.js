@@ -71,8 +71,10 @@ module.exports = function () {
 
     StructureSpawn.prototype.spawnMiner =
         function (sourceId) {
-            return this.spawnCreep([WORK, WORK, WORK, WORK, WORK, MOVE, MOVE, MOVE], undefined, { memory: { role: 'miner', sourceIndex: sourceId } });
-        }
+            return this.createCreep([WORK, WORK, WORK, WORK, WORK, MOVE], undefined,
+                                    { role: 'miner', sourceId: sourceId });
+        };
+
 
     StructureSpawn.prototype.spawnLorry =
         function (energy) {
@@ -87,6 +89,6 @@ module.exports = function () {
             }
 
             // create creep with the created body and the role 'lorry'
-            return this.createCreep(body, undefined, { role: 'lorry', working: false });
+            return this.spawnCreep(body, undefined, { role: 'lorry', working: false });
         };
 };
