@@ -47,7 +47,7 @@ module.exports = function () {
     StructureSpawn.prototype.spawnAttacker =
         function (energy, nbAttackParts, name, role, target) {
             var body = [];
-            
+
             for (let i = 0; i < nbAttackParts; i++) {
                 body.push(RANGED_ATTACK);
             }
@@ -55,7 +55,7 @@ module.exports = function () {
                 body.push(ATTACK);
             }
 
-            var nbMoveParts = Math.floor((energy - nbAttackParts * 230) /50)
+            var nbMoveParts = Math.floor((energy - nbAttackParts * 230) / 50)
             for (let i = 0; i < nbMoveParts; i++) {
                 body.push(MOVE);
             }
@@ -69,8 +69,24 @@ module.exports = function () {
             })
         };
 
-    StructureSpawn.prototype.spawnMiner = 
+    StructureSpawn.prototype.spawnMiner =
         function (name, sourceId) {
-            return this.spawnCreep([WORK, WORK, WORK, WORK, WORK, MOVE, MOVE, MOVE], name, {memory: {role: 'miner', sourceIndex: sourceId}});
+            return this.spawnCreep([WORK, WORK, WORK, WORK, WORK, MOVE, MOVE, MOVE], name, { memory: { role: 'miner', sourceIndex: sourceId } });
         }
+
+    StructureSpawn.prototype.spawnLorry =
+        function (energy) {
+            // create a body with twice as many CARRY as MOVE parts
+            var numberOfParts = Math.floor(energy / 150);
+            var body = [];
+            for (let i = 0; i < numberOfParts * 2; i++) {
+                body.push(CARRY);
+            }
+            for (let i = 0; i < numberOfParts; i++) {
+                body.push(MOVE);
+            }
+
+            // create creep with the created body and the role 'lorry'
+            return this.createCreep(body, undefined, { role: 'lorry', working: false });
+        };
 };
