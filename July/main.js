@@ -49,6 +49,8 @@ module.exports.loop = function () {
         var lorries = _.sum(creepInRoom, (c) => c.memory.role == 'lorry');
         var maxLorries = spawn.memory.maxLorries;
 
+        var miners = _.sum(creepInRoom, (c) => c.memory.role == 'miner');
+
         var energy = spawn.room.energyCapacityAvailable;
 
         if (harvesters == 0 && (miners == 0 || lorries == 0)) {
