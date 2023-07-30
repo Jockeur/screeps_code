@@ -58,7 +58,7 @@ module.exports = function () {
                 body.push(MOVE);
             }
 
-            console.log(name);
+            console.log(body);
             return this.spawnCreep(body, name, {
                 memory:
                 {
