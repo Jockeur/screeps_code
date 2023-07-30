@@ -2,7 +2,6 @@ var roleLongDistanceAttacker = {
     
     run:function(creep) {
         if(creep.room.name == creep.memory.target) {
-            console.log(creep.memory.target)
             var closestHostileCreep = creep.pos.findClosestByPath(FIND_HOSTILE_CREEPS);
             var closestHostileStructure = creep.pos.findClosestByPath(FIND_HOSTILE_STRUCTURES);
             if(closestHostileCreep) {
