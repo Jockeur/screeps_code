@@ -81,7 +81,7 @@ module.exports.loop = function () {
                     // if there is a container next to the source
                     if (containers.length > 0) {
                         // spawn a miner
-                        name = spawn.createMiner(source.id);
+                        name = spawn.spawnMiner(source.id);
                         break;
                     }
                 }
