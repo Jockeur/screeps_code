@@ -59,7 +59,7 @@ module.exports.loop = function () {
             // if there are still miners left
             if (miners > 0) {
                 // create a lorry
-                spawn.createLorry(spawn.room.energyAvailable);
+                spawn.spawnLorry(spawn.room.energyAvailable);
             }
             // if there is no miner left
             else {
