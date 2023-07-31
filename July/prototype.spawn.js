@@ -48,14 +48,17 @@ module.exports = function () {
         function (energy, nbAttackParts, name, role, target) {
             var body = [];
 
+            for(let i = 0; i < nbAttackParts; i++){
+                body.push(TOUGH);
+                body.push(TOUGH);
+            }
+
             for (let i = 0; i < nbAttackParts; i++) {
                 body.push(RANGED_ATTACK);
-            }
-            for (let i = 0; i < nbAttackParts; i++) {
                 body.push(ATTACK);
             }
 
-            var nbMoveParts = Math.floor((energy - nbAttackParts * 230) / 50)
+            var nbMoveParts = Math.floor((energy - nbAttackParts * 250) / 50)
             for (let i = 0; i < nbMoveParts; i++) {
                 body.push(MOVE);
             }
