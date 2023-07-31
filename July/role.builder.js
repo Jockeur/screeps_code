@@ -1,4 +1,5 @@
 roleUpgrader = require('role.upgrader');
+roleLongDistanceRepairer = require('role.longDistanceRepairer');
 var roleBuilder = {
     run: function(creep) {
         if(!creep.memory.working) {
@@ -11,8 +12,10 @@ var roleBuilder = {
             if(creep.build(site) == ERR_NOT_IN_RANGE) {
                 creep.moveTo(site);
             }
-            if(site == undefined) {
-                roleUpgrader.run(creep);
+            if(creep.memory.role == 'builder') {
+                roleUpgrader.run(creep)
+            } else {
+                roleLongDistanceRepairer.run(creep)
             }
         }
     }

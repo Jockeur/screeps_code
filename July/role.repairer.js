@@ -7,7 +7,7 @@ var roleRepairer = {
                 filter: (s) => s.hits < s.hitsMax && s.structureType != STRUCTURE_WALL && s.structureType != STRUCTURE_RAMPART
             });
 
-            if (structure != undefined) {
+            if (structure) {
                 if (creep.repair(structure) == ERR_NOT_IN_RANGE) {
                     creep.moveTo(structure);
                 }
