@@ -48,13 +48,10 @@ module.exports = function () {
         function (energy, nbAttackParts, name, role, target) {
             var body = [];
 
-            for(let i = 0; i < nbAttackParts; i++){
-                body.push(TOUGH);
-                body.push(TOUGH);
-            }
-
             for (let i = 0; i < nbAttackParts; i++) {
+                body.push(TOUGH);
                 body.push(RANGED_ATTACK);
+                body.push(TOUGH);
                 body.push(ATTACK);
             }
 
@@ -69,7 +66,7 @@ module.exports = function () {
                     role: role,
                     target: target
                 }
-            })
+            });
         };
 
     StructureSpawn.prototype.spawnMiner =
