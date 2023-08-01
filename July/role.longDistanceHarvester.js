@@ -14,7 +14,7 @@ module.exports = {
                 }
             } else {
                 var exit = creep.room.findExitTo(creep.memory.home);
-                creep.moveTo(creep.findClosestByPath(exit));
+                creep.moveTo(creep.pos.findClosestByPath(exit));
             }
         } else {
             if(creep.room.name == creep.memory.target) {
@@ -24,7 +24,7 @@ module.exports = {
                 }
             } else {
                 var exit = creep.room.findExitTo(creep.memory.target);
-                creep.moveTo(creep.findClosestByPath(exit));
+                creep.moveTo(creep.pos.findClosestByPath(exit));
             }
         }
     }
