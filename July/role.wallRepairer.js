@@ -4,7 +4,7 @@ var roleWallRepairer = {
         if(!creep.memory.working) {
             var source = creep.pos.findClosestByPath(FIND_SOURCES);
             if(creep.harvest(source) == ERR_NOT_IN_RANGE) {
-                creep.moveTo(source, {visualizePathStyle: {stroke: '#ffffff'}});
+                creep.moveTo(source);
             }
         } else {
             var walls = creep.room.find(FIND_STRUCTURES, (s) => s.structureType == STRUCTURE_RAMPART || s.structureType == STRUCTURE_WALL);
@@ -24,7 +24,7 @@ var roleWallRepairer = {
 
             if(target) {
                 if(creep.repair(target) == ERR_NOT_IN_RANGE) {
-                    creep.moveTo(target, {visualizePathStyle: {stroke: '#0CFF00'}});
+                    creep.moveTo(target);
                 }
             } else {
                 roleBuilder.run(creep);
