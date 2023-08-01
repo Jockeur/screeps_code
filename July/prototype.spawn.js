@@ -72,7 +72,7 @@ module.exports = function () {
     StructureSpawn.prototype.spawnMiner =
         function (sourceId) {
             return this.createCreep([WORK, WORK, WORK, WORK, WORK, MOVE, MOVE, MOVE, MOVE], undefined,
-                                    { role: 'miner', sourceId: sourceId });
+                { role: 'miner', sourceId: sourceId });
         };
 
 
@@ -89,6 +89,6 @@ module.exports = function () {
             }
 
             // create creep with the created body and the role 'lorry'
-            return this.spawnCreep(body, 'Lorry' + Game.time, {memory:{ role: 'lorry', working: false }});
+            return this.spawnCreep(body, 'Lorry' + Game.time, { memory: { role: 'lorry', working: false } });
         };
 };

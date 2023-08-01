@@ -1,7 +1,7 @@
 var roleHarvester = require('role.harvester');
 
 var roleRepairer = {
-    run: function(creep) {
+    run: function (creep) {
         if (creep.memory.working == true) {
             var structure = creep.pos.findClosestByPath(FIND_STRUCTURES, {
                 filter: (s) => s.hits < s.hitsMax && s.structureType != STRUCTURE_WALL && s.structureType != STRUCTURE_RAMPART

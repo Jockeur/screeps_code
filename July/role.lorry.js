@@ -2,10 +2,10 @@ var roleHarvester = require('role.harvester');
 
 module.exports = {
     // a function to run the logic for this role
-    run: function(creep) {
+    run: function (creep) {
         // if creep is supposed to transfer energy to a structure
         if (creep.memory.working) {
-           roleHarvester.run(creep);
+            roleHarvester.run(creep);
         }
         // if creep is supposed to get energy
         else {
