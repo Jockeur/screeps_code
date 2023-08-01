@@ -109,7 +109,7 @@ module.exports.loop = function () {
             spawn.spawnCustomCreep(energy, newName, 'wallRepairer')
         } else if (longDistanceAttackers < maxLongDistanceAttackers) {
             var newName = 'LDA' + Game.time;
-            spawn.spawnAttacker(energy, 5, newName, 'longDistanceAttacker', 'E16N5');
+            spawn.spawnAttacker(energy, 5, newName, 'longDistanceAttacker', 'E17N6');
         } else if (longDistanceHarvesters < maxLongDistanceHarvesters) {
             var newName = 'LDH' + Game.time;
             spawn.spawnLongDistanceCreep(energy, newName, 4, spawn.room.name, 'E17N6', 0, 'longDistanceHarvester');
