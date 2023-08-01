@@ -4,9 +4,11 @@ var role = {
     run: function (creep) {
         if (!creep.memory.working) {
             if (creep.room.name == creep.memory.home) {
-                var source = creep.room.find(FIND_SOURCES)[creep.memory.sourceIndex];
-                if (creep.harvest(source) == ERR_NOT_IN_RANGE) {
-                    creep.moveTo(source, { visualizePathStyle: { stroke: '#ffffff' } });
+                var container = creep.pos.findClosestByPath(FIND_STRUCTURES, {
+                    filter: (s) => s.structureType == STRUCTURE_CONTAINER
+                })
+                if (creep.withdraw(container) == ERR_NOT_IN_RANGE) {
+                    creep.moveTo(container);
                 }
             } else {
                 var exit = creep.room.findExitTo(creep.memory.home);
