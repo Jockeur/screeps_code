@@ -42,7 +42,7 @@ module.exports.loop = function () {
         var longDistanceBuilders = _.sum(Game.creeps, (c) => c.memory.role == 'longDistanceBuilder');
         var maxLongDistanceBuilders = spawn.memory.maxLongDistanceBuilders;
 
-        var longDistanceAttackers = _.sum(Game.creeps, (c) => c.memory.role == 'longDistanceAttackers');
+        var longDistanceAttackers = _.sum(Game.creeps, (c) => c.memory.role == 'longDistanceAttacker');
         var maxLongDistanceAttackers = spawn.memory.maxLongDistanceAttackers;
 
         var wallRepairers = _.sum(creepInRoom, (c) => c.memory.role == 'wallRepairer');
