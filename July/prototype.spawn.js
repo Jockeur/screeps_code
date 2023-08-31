@@ -3,13 +3,13 @@ module.exports = function () {
         function (energy, name, roleName) {
             var numberOfParts = Math.floor(energy / 200);
             var body = [];
-            for (let i = 0; i < numberOfParts; i++) {
+            for (let i = 0; i < numberOfParts && numberOfParts <= 5; i++) {
                 body.push(WORK);
             }
-            for (let i = 0; i < numberOfParts; i++) {
+            for (let i = 0; i < numberOfParts && numberOfParts <= 5; i++) {
                 body.push(CARRY);
             }
-            for (let i = 0; i < numberOfParts; i++) {
+            for (let i = 0; i < numberOfParts && numberOfParts <= 5; i++) {
                 body.push(MOVE);
             }
             return this.spawnCreep(body, name, { memory: { role: roleName, working: false } });
@@ -91,4 +91,10 @@ module.exports = function () {
             // create creep with the created body and the role 'lorry'
             return this.spawnCreep(body, 'Lorry' + Game.time, { memory: { role: 'lorry', working: false } });
         };
+
+    StructureSpawn.prototype.spawnClaimer = 
+        function(target) {
+            var body = [CLAIM, MOVE, MOVE, MOVE];
+            return this.spawnCreep(body, 'Claimer' + Game.time, {memory: {role: 'claimer', target: target}});
+        }
 };

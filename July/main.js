@@ -3,6 +3,7 @@ var roleHarvester = require('role.harvester');
 var roleUpgrader = require('role.upgrader');
 var roleRepairer = require('role.repairer');
 var roleBuilder = require('role.builder');
+var roleClaimer = require('role.claimer');
 var roleLorry = require('role.lorry');
 var roleMiner = require('role.miner');
 var roleWallRepairer = require('role.wallRepairer');
@@ -89,6 +90,12 @@ module.exports.loop = function () {
             }
         }
 
+        if(spawn.memory.claimRoom != undefined){
+            if(spawn.spawnClaimer(spawn.memory.claimRoom) == 0){
+                delete spawn.memory.claimRoom;
+            }
+        }
+
         if (harvesters < maxHarvesters) {
             var newName = 'Harvester' + Game.time;
             spawn.spawnCustomCreep(energy, newName, 'harvester');
@@ -134,6 +141,7 @@ module.exports.loop = function () {
             case 'miner': roleMiner.run(creep); break;
             case 'lorry': roleLorry.run(creep); break;
             case 'builder': roleBuilder.run(creep); break;
+            case 'claimer': roleClaimer.run(creep); break;
             case 'upgrader': roleUpgrader.run(creep); break;
             case 'repairer': roleRepairer.run(creep); break;
             case 'harvester': roleHarvester.run(creep); break;
