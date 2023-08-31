@@ -26,6 +26,7 @@ module.exports = function () {
             }
             energy -= 150 * nbWorkParts;
             var nbParts = Math.floor(energy / 100)
+            nbParts <= 10 ? nbParts = nbParts : nbParts = 10;
 
             for (let i = 0; i < nbParts; i++) {
                 body.push(CARRY);
