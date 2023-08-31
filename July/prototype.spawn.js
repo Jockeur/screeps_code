@@ -2,14 +2,17 @@ module.exports = function () {
     StructureSpawn.prototype.spawnCustomCreep =
         function (energy, name, roleName) {
             var numberOfParts = Math.floor(energy / 200);
+
+            numberOfParts > 5 ? numberOfParts = 5 : numberOfParts = numberOfParts;
+            
             var body = [];
-            for (let i = 0; i < numberOfParts && numberOfParts <= 5; i++) {
+            for (let i = 0; i < numberOfParts; i++) {
                 body.push(WORK);
             }
-            for (let i = 0; i < numberOfParts && numberOfParts <= 5; i++) {
+            for (let i = 0; i < numberOfParts; i++) {
                 body.push(CARRY);
             }
-            for (let i = 0; i < numberOfParts && numberOfParts <= 5; i++) {
+            for (let i = 0; i < numberOfParts; i++) {
                 body.push(MOVE);
             }
             return this.spawnCreep(body, name, { memory: { role: roleName, working: false } });
