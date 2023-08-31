@@ -122,7 +122,7 @@ module.exports.loop = function () {
             spawn.spawnLongDistanceCreep(energy, newName, 4, spawn.room.name, 'E17N6', 0, 'longDistanceHarvester');
         } else if (longDistanceBuilders < maxLongDistanceBuilders) {
             var newName = 'LDB' + Game.time;
-            spawn.spawnLongDistanceCreep(energy, newName, 4, spawn.room.name, 'E17N6', 0, 'longDistanceBuilder');
+            spawn.spawnLongDistanceCreep(energy, newName, 4, spawn.room.name, 'E18N5', 0, 'longDistanceBuilder');
         }
     }
 
