@@ -13,8 +13,10 @@ module.exports = {
             let container = creep.pos.findClosestByPath(FIND_STRUCTURES, {
                 filter: s => s.structureType == STRUCTURE_CONTAINER && s.store.energy > 0
             });
-            // if one was found
-            if (container) {
+            closestResource = creep.pos.findClosestByPath(FIND_DROPPED_RESOURCES);
+            if (closestResource && creep.pickup(closestResource) == ERR_NOT_IN_RANGE) {
+                creep.moveTo(closestResource);
+            } else if (container) {
                 // try to withdraw energy, if the container is not in range
                 if (creep.withdraw(container, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                     // move towards it
@@ -22,7 +24,7 @@ module.exports = {
                 }
             } else {
                 closestResource = creep.pos.findClosestByPath(FIND_DROPPED_RESOURCES);
-                if(closestResource && creep.pickup(closestResource) == ERR_NOT_IN_RANGE) {
+                if (closestResource && creep.pickup(closestResource) == ERR_NOT_IN_RANGE) {
                     creep.moveTo(closestResource);
                 }
             }
