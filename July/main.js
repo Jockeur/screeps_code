@@ -6,12 +6,13 @@ var roleBuilder = require('role.builder');
 var roleClaimer = require('role.claimer');
 var roleLorry = require('role.lorry');
 var roleMiner = require('role.miner');
+var roleLocalBuilder = require('role.localBuilder');
 var roleWallRepairer = require('role.wallRepairer');
 var roleLongDistanceBuilder = require('role.longDistanceBuilder');
 var roleLongDistanceAttacker = require('role.longDistanceAttacker');
 var roleLongDistanceHarvester = require('role.longDistanceHarvester');
 
-var HOME = 'E17N5';
+var HOME;
 
 module.exports.loop = function () {
     for (let name in Memory.creeps) {
@@ -22,6 +23,8 @@ module.exports.loop = function () {
 
     for (let spawnName in Game.spawns) {
         var spawn = Game.spawns[spawnName];
+
+        HOME = spawn.room.name;
 
         var creepInRoom = spawn.room.find(FIND_MY_CREEPS);
 
@@ -36,6 +39,9 @@ module.exports.loop = function () {
 
         var builders = _.sum(creepInRoom, (c) => c.memory.role == 'builder');
         var maxBuilders = spawn.memory.maxBuilders;
+
+        var localBuilders = _.sum(Game.creeps, (c) => c.memory.role == 'localBuilder');
+        var maxLocalBuilders = spawn.memory.maxLocalBuilders;
 
         var longDistanceHarvesters = _.sum(Game.creeps, (c) => c.memory.role == 'longDistanceHarvester');
         var maxLongDistanceHarvesters = spawn.memory.maxLongDistanceHarvesters;
@@ -105,6 +111,9 @@ module.exports.loop = function () {
         } else if (upgraders < maxUpgraders) {
             var newName = 'Upgrader' + Game.time;
             spawn.spawnCustomCreep(energy, newName, 'upgrader');
+        } else if(localBuilders < maxLocalBuilders) {
+            var newName = 'localBuilder' + Game.time;
+            spawn.spawnLongDistanceCreep(energy, newName, 5, spawn.room.name, 'E18N5', 0, 'localBuilder')
         } else if (builders < maxBuilders) {
             var newName = 'Builder' + Game.time;
             spawn.spawnCustomCreep(energy, newName, 'builder');
@@ -145,6 +154,7 @@ module.exports.loop = function () {
             case 'upgrader': roleUpgrader.run(creep); break;
             case 'repairer': roleRepairer.run(creep); break;
             case 'harvester': roleHarvester.run(creep); break;
+            case 'localBuilder': roleLocalBuilder.run(creep); break;
             case 'wallRepairer': roleWallRepairer.run(creep); break;
             case 'longDistanceBuilder': roleLongDistanceBuilder.run(creep); break;
             case 'longDistanceAttacker': roleLongDistanceAttacker.run(creep); break;
