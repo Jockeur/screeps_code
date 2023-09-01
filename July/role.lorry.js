@@ -21,7 +21,7 @@ module.exports = {
                     creep.moveTo(container);
                 }
             } else {
-                closestResource = creep.pos.find(FIND_DROPPED_RESOURCES);
+                closestResource = creep.pos.findClosestByPath(FIND_DROPPED_RESOURCES);
                 if(closestResource && creep.pickup(closestResource) == ERR_NOT_IN_RANGE) {
                     creep.moveTo(closestResource);
                 }
