@@ -81,7 +81,7 @@ module.exports = function () {
 
 
     StructureSpawn.prototype.spawnLorry =
-        function (energy) {
+        function (energy, newName, role) {
             // create a body with twice as many CARRY as MOVE parts
             var numberOfParts = Math.floor(energy / 150);
 
@@ -96,7 +96,7 @@ module.exports = function () {
             }
 
             // create creep with the created body and the role 'lorry'
-            return this.spawnCreep(body, 'Lorry' + Game.time, { memory: { role: 'lorry', working: false } });
+            return this.spawnCreep(body, newName, { memory: { role: role, working: false } });
         };
 
     StructureSpawn.prototype.spawnClaimer = 
