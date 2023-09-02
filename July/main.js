@@ -68,7 +68,7 @@ module.exports.loop = function () {
 
         var energy = spawn.room.energyCapacityAvailable;
 
-        if (harvesters == 0 && (miners == 0 || lorries == 0)) {
+        if (harvesters == 0 && (miners == 0 || lorries == 0 || mineralLorries == 0)) {
             // if there are still miners left
             if (miners > 0) {
                 // create a lorry
@@ -81,7 +81,7 @@ module.exports.loop = function () {
             }
 
             if (excavators > 0) {
-                //spawn.spawnLorry(spawn.room.energyAvailable, 'mineralLorry', 'mineralLorry', spawn.room.find(FIND_MINERALS)[0].mineralType);
+                spawn.spawnLorry(spawn.room.energyAvailable, 'mineralLorry', 'mineralLorry', spawn.room.find(FIND_MINERALS)[0].mineralType);
             }
         }
         // if no backup creep is required
