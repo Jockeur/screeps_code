@@ -6,7 +6,7 @@ roleUpgrader = {
                 creep.moveTo(controller);
             }
         } else {
-            var container = creep.pos.findClosestByPath(FIND_STRUCTURES, { filter: (s) => s.structureType == STRUCTURE_CONTAINER });
+            var container = creep.pos.findClosestByPath(FIND_STRUCTURES, { filter: (s) => s.structureType == STRUCTURE_CONTAINER && s.store.energy > 0});
             var resource = creep.pos.findClosestByPath(FIND_DROPPED_RESOURCES);
             if (container) {
                 if (creep.withdraw(container, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
