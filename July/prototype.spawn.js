@@ -4,7 +4,7 @@ module.exports = function () {
             var numberOfParts = Math.floor(energy / 200);
 
             numberOfParts > 5 ? numberOfParts = 5 : numberOfParts = numberOfParts;
-            
+
             var body = [];
             for (let i = 0; i < numberOfParts; i++) {
                 body.push(WORK);
@@ -78,7 +78,7 @@ module.exports = function () {
             return this.createCreep([WORK, WORK, WORK, WORK, WORK, MOVE, MOVE, MOVE, MOVE], undefined,
                 { role: 'miner', sourceId: sourceId });
         };
-        
+
     StructureSpawn.prototype.spawnExcavator =
         function (mineralId) {
             return this.createCreep([WORK, WORK, WORK, WORK, WORK, MOVE, MOVE, MOVE, MOVE], undefined,
@@ -87,7 +87,7 @@ module.exports = function () {
 
 
     StructureSpawn.prototype.spawnLorry =
-        function (energy, newName, role) {
+        function (energy, newName, role, mineralType) {
             // create a body with twice as many CARRY as MOVE parts
             var numberOfParts = Math.floor(energy / 150);
 
@@ -102,12 +102,16 @@ module.exports = function () {
             }
 
             // create creep with the created body and the role 'lorry'
-            return this.spawnCreep(body, newName, { memory: { role: role, working: false } });
+            if (mineralType == undefined) {
+                return this.spawnCreep(body, newName, { memory: { role: role, working: false } });
+            } else {
+                return this.spawnCreep(body, newName, { memory: { role: role, working: false, mineralType: mineralType } });
+            }
         };
 
-    StructureSpawn.prototype.spawnClaimer = 
-        function(target) {
+    StructureSpawn.prototype.spawnClaimer =
+        function (target) {
             var body = [CLAIM, MOVE, MOVE, MOVE];
-            return this.spawnCreep(body, 'Claimer' + Game.time, {memory: {role: 'claimer', target: target}});
+            return this.spawnCreep(body, 'Claimer' + Game.time, { memory: { role: 'claimer', target: target } });
         }
 };
