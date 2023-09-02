@@ -2,7 +2,7 @@ var role = {
     run: function (creep) {
         const mineralType = creep.memory.mineralType
 
-        if (creep.store[mineralType] == creep.store.getCapacity(mineralType) && !creep.memory.working) {
+        if (creep.store.mineralType == creep.store.getCapacity && !creep.memory.working) {
             creep.memory.working = true;
         } else if (creep.store[mineralType] == 0 && creep.memory.working) {
             creep.memory.working = false
