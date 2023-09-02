@@ -1,16 +1,17 @@
 require('prototype.spawn')();
-var roleHarvester = require('role.harvester');
-var roleUpgrader = require('role.upgrader');
-var roleRepairer = require('role.repairer');
-var roleBuilder = require('role.builder');
-var roleClaimer = require('role.claimer');
-var roleLorry = require('role.lorry');
-var roleMiner = require('role.miner');
-var roleLocalBuilder = require('role.localBuilder');
-var roleWallRepairer = require('role.wallRepairer');
-var roleLongDistanceBuilder = require('role.longDistanceBuilder');
-var roleLongDistanceAttacker = require('role.longDistanceAttacker');
-var roleLongDistanceHarvester = require('role.longDistanceHarvester');
+const roleHarvester = require('role.harvester');
+const roleUpgrader = require('role.upgrader');
+const roleRepairer = require('role.repairer');
+const roleBuilder = require('role.builder');
+const roleClaimer = require('role.claimer');
+const roleLorry = require('role.lorry');
+const roleMiner = require('role.miner');
+const roleMineralLorry = require('role.mineralLorry');
+const roleLocalBuilder = require('role.localBuilder');
+const roleWallRepairer = require('role.wallRepairer');
+const roleLongDistanceBuilder = require('role.longDistanceBuilder');
+const roleLongDistanceAttacker = require('role.longDistanceAttacker');
+const roleLongDistanceHarvester = require('role.longDistanceHarvester');
 
 var HOME;
 
@@ -58,6 +59,9 @@ module.exports.loop = function () {
         var lorries = _.sum(creepInRoom, (c) => c.memory.role == 'lorry');
         var maxLorries = spawn.memory.maxLorries;
 
+        var mineralLorries = _.sum(creepInRoom, (c) => c.memory.role == 'mineralLorry');
+        var maxMineralLorries = spawn.memory.maxMineralLorries;
+
         var miners = _.sum(creepInRoom, (c) => c.memory.role == 'miner');
 
         var energy = spawn.room.energyCapacityAvailable;
@@ -96,8 +100,8 @@ module.exports.loop = function () {
             }
         }
 
-        if(spawn.memory.claimRoom != undefined){
-            if(spawn.spawnClaimer(spawn.memory.claimRoom) == 0){
+        if (spawn.memory.claimRoom != undefined) {
+            if (spawn.spawnClaimer(spawn.memory.claimRoom) == 0) {
                 delete spawn.memory.claimRoom;
             }
         }
@@ -111,9 +115,12 @@ module.exports.loop = function () {
         } else if (upgraders < maxUpgraders) {
             var newName = 'Upgrader' + Game.time;
             spawn.spawnCustomCreep(energy, newName, 'upgrader');
-        } else if(localBuilders < maxLocalBuilders) {
+        } else if (localBuilders < maxLocalBuilders) {
             var newName = 'localBuilder' + Game.time;
             spawn.spawnLongDistanceCreep(energy, newName, 5, spawn.room.name, 'E18N5', 0, 'localBuilder')
+        } else if (mineralLorries < maxMineralLorries){
+            var newName = 'mineralLorry' + Game.time;
+            spawn.spawnLorry(energy, newName);
         } else if (builders < maxBuilders) {
             var newName = 'Builder' + Game.time;
             spawn.spawnCustomCreep(energy, newName, 'builder');
@@ -154,6 +161,7 @@ module.exports.loop = function () {
             case 'upgrader': roleUpgrader.run(creep); break;
             case 'repairer': roleRepairer.run(creep); break;
             case 'harvester': roleHarvester.run(creep); break;
+            case 'mineralLorry': roleMineralLorry.run(creep); break;
             case 'localBuilder': roleLocalBuilder.run(creep); break;
             case 'wallRepairer': roleWallRepairer.run(creep); break;
             case 'longDistanceBuilder': roleLongDistanceBuilder.run(creep); break;
