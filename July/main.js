@@ -68,7 +68,7 @@ module.exports.loop = function () {
 
         var energy = spawn.room.energyCapacityAvailable;
 
-        if (harvesters == 0 && (miners == 0 || lorries == 0 || excavators == 0)) {
+        if (harvesters == 0 && (miners == 0 || lorries == 0)) {
             // if there are still miners left
             if (miners > 0) {
                 // create a lorry
@@ -84,7 +84,7 @@ module.exports.loop = function () {
         else {
             // check if all sources and minerals have miners
             let sources = spawn.room.find(FIND_SOURCES);
-            let mineral = spawn.room.find(FIND_MINERALS)[0];
+            let minerals = spawn.room.find(FIND_MINERALS);
             // iterate over all sources
             for (let source of sources) {
                 // if the source has no miner
@@ -102,14 +102,16 @@ module.exports.loop = function () {
                 }
             }
 
-            if(!_.some(creepInRoom, c => c.memory.role == 'excavator' && c.memory.mineralId == mineral.id)) {
-                let containers = mineral.pos.findInRange(FIND_STRUCTURES, 1, {
-                    filter: s => s.structureType == STRUCTURE_CONTAINER
-                });
-                // if there is a container next to the source
-                if (containers.length > 0) {
-                    // spawn a miner
-                    spawn.spawnExcavator(mineral.id);
+            for (let mineral of minerals) {
+                if(!_.some(creepInRoom, c => c.memory.role == 'excavator' && c.memory.mineralId == mineral.id)) {
+                    let containers = mineral.pos.findInRange(FIND_STRUCTURES, 1, {
+                        filter: s => s.structureType == STRUCTURE_CONTAINER
+                    });
+                    // if there is a container next to the source
+                    if (containers.length > 0) {
+                        // spawn a miner
+                        spawn.spawnExcavator(mineral.id);
+                    }
                 }
             }
             
