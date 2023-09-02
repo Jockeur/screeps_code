@@ -16,7 +16,7 @@ var role = {
                 }
             }
         } else {
-            const storage = creep.room.find(FIND_STRUCTURES, { filter: (s) => s.structureType == STRUCTURE_STORAGE });
+            const storage = creep.room.storage
             if (creep.transfer(storage, mineralType) == ERR_NOT_IN_RANGE) {
                 creep.moveTo(storage);
             }
