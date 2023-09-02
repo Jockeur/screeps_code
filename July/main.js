@@ -1,5 +1,6 @@
 require('prototype.spawn')();
 const roleHarvester = require('role.harvester');
+const roleExcavator = require('role.excavator');
 const roleUpgrader = require('role.upgrader');
 const roleRepairer = require('role.repairer');
 const roleBuilder = require('role.builder');
@@ -63,10 +64,11 @@ module.exports.loop = function () {
         var maxMineralLorries = spawn.memory.maxMineralLorries;
 
         var miners = _.sum(creepInRoom, (c) => c.memory.role == 'miner');
+        var excavators = _.sum(creepInRoom, (c) => c.memory.role == 'excavator')
 
         var energy = spawn.room.energyCapacityAvailable;
 
-        if (harvesters == 0 && (miners == 0 || lorries == 0)) {
+        if (harvesters == 0 && (miners == 0 || lorries == 0 || excavators == 0)) {
             // if there are still miners left
             if (miners > 0) {
                 // create a lorry
@@ -80,8 +82,9 @@ module.exports.loop = function () {
         }
         // if no backup creep is required
         else {
-            // check if all sources have miners
+            // check if all sources and minerals have miners
             let sources = spawn.room.find(FIND_SOURCES);
+            let mineral = spawn.room.find(FIND_MINERALS)[0];
             // iterate over all sources
             for (let source of sources) {
                 // if the source has no miner
@@ -98,6 +101,18 @@ module.exports.loop = function () {
                     }
                 }
             }
+
+            if(!_.some(creepInRoom, c => c.memory.role == 'excavator' && c.memory.mineralId == mineral.id)) {
+                let containers = mineral.pos.findInRange(FIND_STRUCTURES, 1, {
+                    filter: s => s.structureType == STRUCTURE_CONTAINER
+                });
+                // if there is a container next to the source
+                if (containers.length > 0) {
+                    // spawn a miner
+                    spawn.spawnExcavator(mineral.id);
+                }
+            }
+            
         }
 
         if (spawn.memory.claimRoom != undefined) {
@@ -160,6 +175,7 @@ module.exports.loop = function () {
             case 'claimer': roleClaimer.run(creep); break;
             case 'upgrader': roleUpgrader.run(creep); break;
             case 'repairer': roleRepairer.run(creep); break;
+            case 'excavator': roleExcavator.run(creep); break;
             case 'harvester': roleHarvester.run(creep); break;
             case 'mineralLorry': roleMineralLorry.run(creep); break;
             case 'localBuilder': roleLocalBuilder.run(creep); break;

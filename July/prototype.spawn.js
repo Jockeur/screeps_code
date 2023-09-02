@@ -78,6 +78,12 @@ module.exports = function () {
             return this.createCreep([WORK, WORK, WORK, WORK, WORK, MOVE, MOVE, MOVE, MOVE], undefined,
                 { role: 'miner', sourceId: sourceId });
         };
+        
+    StructureSpawn.prototype.spawnExcavator =
+        function (mineralId) {
+            return this.createCreep([WORK, WORK, WORK, WORK, WORK, MOVE, MOVE, MOVE, MOVE], undefined,
+                { role: 'excavator', mineralId: mineralId });
+        };
 
 
     StructureSpawn.prototype.spawnLorry =
