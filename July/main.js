@@ -24,20 +24,6 @@ module.exports.loop = function () {
     }
 
     for (let spawnName in Game.spawns) {
-
-        var towers = Game.rooms[HOME].find(FIND_STRUCTURES, { filter: (s) => s.structureType == STRUCTURE_TOWER });
-        for (let tower of towers) {
-            var target = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
-            if (target) {
-                tower.attack(target);
-            }
-    
-            var heal = tower.pos.findClosestByPath(FIND_MY_CREEPS, { filter: (c) => c.hits < c.hitsMax });
-            if (!target && heal) {
-                tower.heal(heal);
-            }
-        }
-
         var spawn = Game.spawns[spawnName];
 
         HOME = spawn.room.name;
@@ -94,7 +80,7 @@ module.exports.loop = function () {
                 spawn.spawnCustomCreep(spawn.room.energyAvailable, 'harvester' + Game.time, 'harvester');
             }
 
-            if(excavators > 0) {
+            if (excavators > 0) {
                 spawn.spawnLorry(spawn.room.energyAvailable, 'mineralLorry', 'mineralLorry', spawn.room.find(FIND_MINERALS)[0].mineralType);
             }
         }
@@ -121,7 +107,7 @@ module.exports.loop = function () {
             }
 
             for (let mineral of minerals) {
-                if(!_.some(creepInRoom, c => c.memory.role == 'excavator' && c.memory.mineralId == mineral.id)) {
+                if (!_.some(creepInRoom, c => c.memory.role == 'excavator' && c.memory.mineralId == mineral.id)) {
                     let containers = mineral.pos.findInRange(FIND_STRUCTURES, 1, {
                         filter: s => s.structureType == STRUCTURE_CONTAINER
                     });
@@ -132,7 +118,7 @@ module.exports.loop = function () {
                     }
                 }
             }
-            
+
         }
 
         if (spawn.memory.claimRoom != undefined) {
@@ -153,7 +139,7 @@ module.exports.loop = function () {
         } else if (localBuilders < maxLocalBuilders) {
             var newName = 'localBuilder' + Game.time;
             spawn.spawnLongDistanceCreep(energy, newName, 5, spawn.room.name, 'E18N5', 0, 'localBuilder')
-        } else if (mineralLorries < maxMineralLorries){
+        } else if (mineralLorries < maxMineralLorries) {
             var newName = 'mineralLorry' + Game.time;
             spawn.spawnLorry(energy, newName, 'mineralLorry');
         } else if (builders < maxBuilders) {
@@ -174,6 +160,19 @@ module.exports.loop = function () {
         } else if (longDistanceBuilders < maxLongDistanceBuilders) {
             var newName = 'LDB' + Game.time;
             spawn.spawnLongDistanceCreep(energy, newName, 4, spawn.room.name, 'E18N5', 0, 'longDistanceBuilder');
+        }
+
+        var towers = Game.rooms[HOME].find(FIND_STRUCTURES, { filter: (s) => s.structureType == STRUCTURE_TOWER });
+        for (let tower of towers) {
+            var target = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
+            if (target) {
+                tower.attack(target);
+            }
+
+            var heal = tower.pos.findClosestByPath(FIND_MY_CREEPS, { filter: (c) => c.hits < c.hitsMax });
+            if (!target && heal) {
+                tower.heal(heal);
+            }
         }
     }
 
