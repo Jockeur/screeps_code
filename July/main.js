@@ -108,13 +108,15 @@ module.exports.loop = function () {
 
             for (let mineral of minerals) {
                 if (!_.some(creepInRoom, c => c.memory.role == 'excavator' && c.memory.mineralId == mineral.id)) {
-                    let containers = mineral.pos.findInRange(FIND_STRUCTURES, 1, {
-                        filter: s => s.structureType == STRUCTURE_CONTAINER
-                    });
-                    // if there is a container next to the source
-                    if (containers.length > 0) {
-                        // spawn a miner
-                        spawn.spawnExcavator(mineral.id);
+                    if (mineral.mineralAmount) {
+                        let containers = mineral.pos.findInRange(FIND_STRUCTURES, 1, {
+                            filter: s => s.structureType == STRUCTURE_CONTAINER
+                        });
+                        // if there is a container next to the source
+                        if (containers.length > 0) {
+                            // spawn a miner
+                            spawn.spawnExcavator(mineral.id);
+                        }
                     }
                 }
             }
