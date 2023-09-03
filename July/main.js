@@ -141,9 +141,6 @@ module.exports.loop = function () {
         } else if (localBuilders < maxLocalBuilders) {
             var newName = 'localBuilder' + Game.time;
             spawn.spawnLongDistanceCreep(energy, newName, 5, spawn.room.name, 'E18N5', 0, 'localBuilder')
-        } else if (mineralLorries < maxMineralLorries) {
-            var newName = 'mineralLorry' + Game.time;
-            spawn.spawnLorry(energy, newName, 'mineralLorry');
         } else if (builders < maxBuilders) {
             var newName = 'Builder' + Game.time;
             spawn.spawnCustomCreep(energy, newName, 'builder');
