@@ -81,7 +81,7 @@ module.exports.loop = function () {
             }
 
             if (excavators > 0) {
-                spawn.spawnLorry(spawn.room.energyAvailable, 'mineralLorry', spawn.room.find(FIND_MINERALS)[0].mineralType);
+                spawn.spawnLorry(spawn.room.energyAvailable, 'mineralLorry', 'mineralLorry', spawn.room.find(FIND_MINERALS)[0].mineralType);
             }
         }
         // if no backup creep is required
