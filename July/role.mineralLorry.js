@@ -24,8 +24,8 @@ var role = {
             }
         } else {
             let targeted = Game.getObjectById(target.id);
-            if (creep.transfer(target, mineralType) == ERR_NOT_IN_RANGE) {
-                creep.moveTo(target);
+            if (creep.transfer(targeted, mineralType) == ERR_NOT_IN_RANGE) {
+                creep.moveTo(targeted);
             }
         }
     }
