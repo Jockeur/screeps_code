@@ -63,7 +63,7 @@ module.exports.loop = function () {
         var mineralLorries = _.sum(creepInRoom, (c) => c.memory.role == 'mineralLorry');
         var maxMineralLorries = spawn.memory.maxMineralLorries;
 
-        var dealers = _.sum(creepInRoom, (c) => c.memory.role == 'mineralLorry', c.memory.target == c.room.terminal);
+        var dealers = _.sum(creepInRoom, (c) => c.memory.role == 'mineralLorry' && c.memory.target == c.room.terminal);
         var maxDealers = spawn.memory.maxDealers;
 
         var miners = _.sum(creepInRoom, (c) => c.memory.role == 'miner');
