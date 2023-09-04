@@ -11,13 +11,17 @@ roleHarvester = {
                 filter: (s) =>
                     (s.structureType == STRUCTURE_SPAWN
                         || s.structureType == STRUCTURE_EXTENSION
-                        || s.structureType == STRUCTURE_TOWER
-                        || s.structureType == STRUCTURE_TERMINAL)
+                        || s.structureType == STRUCTURE_TOWER)
                     && s.energy < s.energyCapacity
             });
+            var terminal = creep.room.terminal;
             if (target) {
                 if (creep.transfer(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                     creep.moveTo(target);
+                }
+            } if (terminal.store.energy < terminal.store.getCapacity) {
+                if (creep.transfer(terminal, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                    creep.moveTo(terminal);
                 }
             } else {
                 roleBuilder.run(creep);
