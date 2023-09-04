@@ -23,7 +23,7 @@ var role = {
                 }
             }
         } else {
-            target = Game.getObjectbyId(target.id);
+            target = Game.getObjectById(target.id);
             if (creep.transfer(target, mineralType) == ERR_NOT_IN_RANGE) {
                 creep.moveTo(target);
             }
