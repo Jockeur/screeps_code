@@ -87,7 +87,7 @@ module.exports = function () {
 
 
     StructureSpawn.prototype.spawnLorry =
-        function (energy, newName, role, mineralType) {
+        function (energy, newName, role, mineralType, target) {
             // create a body with twice as many CARRY as MOVE parts
             var numberOfParts = Math.floor(energy / 150);
 
@@ -105,7 +105,7 @@ module.exports = function () {
             if (mineralType == undefined) {
                 return this.spawnCreep(body, newName, { memory: { role: role, working: false } });
             } else {
-                return this.spawnCreep(body, newName, { memory: { role: role, working: false, mineralType: mineralType } });
+                return this.spawnCreep(body, newName, { memory: { role: role, working: false, mineralType: mineralType, target: target } });
             }
         };
 

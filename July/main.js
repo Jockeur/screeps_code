@@ -63,6 +63,9 @@ module.exports.loop = function () {
         var mineralLorries = _.sum(creepInRoom, (c) => c.memory.role == 'mineralLorry');
         var maxMineralLorries = spawn.memory.maxMineralLorries;
 
+        var dealers = _.sum(creepInRoom, (c) => c.memory.role == 'mineralLorry', c.memory.target == c.room.terminal);
+        var maxDealers = spawn.memory.maxDealers;
+
         var miners = _.sum(creepInRoom, (c) => c.memory.role == 'miner');
         var excavators = _.sum(creepInRoom, (c) => c.memory.role == 'excavator')
 
@@ -81,7 +84,7 @@ module.exports.loop = function () {
             }
 
             if (excavators > 0) {
-                spawn.spawnLorry(spawn.room.energyAvailable, 'mineralLorry' + Game.time, 'mineralLorry', spawn.room.find(FIND_MINERALS)[0].mineralType);
+                spawn.spawnLorry(spawn.room.energyAvailable, 'mineralLorry' + Game.time, 'mineralLorry', spawn.room.find(FIND_MINERALS)[0].mineralType, creep.room.storage);
             }
         }
         // if no backup creep is required
@@ -149,6 +152,9 @@ module.exports.loop = function () {
         } else if (wallRepairers < maxWallRepairers) {
             var newName = 'WallRepairer' + Game.time;
             spawn.spawnCustomCreep(energy, newName, 'wallRepairer')
+        } else if(dealers < maxDealers) {
+            var newName = 'dealer' + Game.time;
+            spawn.spawnLorry(energy, newName, 'mineralLorry', spawn.room.find(FIND_MINERALS)[0].mineralType, spawn.room.terminal)
         } else if (longDistanceAttackers < maxLongDistanceAttackers) {
             var newName = 'LDA' + Game.time;
             spawn.spawnAttacker(energy, 5, newName, 'longDistanceAttacker', 'E18N5');

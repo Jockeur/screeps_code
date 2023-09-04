@@ -1,6 +1,7 @@
 var role = {
     run: function (creep) {
         const mineralType = creep.memory.mineralType
+        const target = creep.memory.target
 
         if (creep.store[mineralType] == creep.store.getCapacity(mineralType) && !creep.memory.working) {
             creep.memory.working = true;
@@ -9,16 +10,21 @@ var role = {
         }
 
         if (!creep.memory.working) {
-            var container = creep.pos.findClosestByPath(FIND_STRUCTURES, { filter: (s) => s.structureType == STRUCTURE_CONTAINER && s.store[mineralType] > 0 });
-            if (container) {
-                if (creep.withdraw(container, mineralType) == ERR_NOT_IN_RANGE) {
-                    creep.moveTo(container);
+            if (target == creep.room.storage) {
+                var container = creep.pos.findClosestByPath(FIND_STRUCTURES, { filter: (s) => s.structureType == STRUCTURE_CONTAINER && s.store[mineralType] > 0 });
+                if (container) {
+                    if (creep.withdraw(container, mineralType) == ERR_NOT_IN_RANGE) {
+                        creep.moveTo(container);
+                    }
+                }
+            } else {
+                if(creep.withdraw(creep.room.storage, mineralType) == ERR_NOT_IN_RANGE) {
+                    creep.moveTo(creep.room.storage);
                 }
             }
         } else {
-            const storage = creep.room.storage
-            if (creep.transfer(storage, mineralType) == ERR_NOT_IN_RANGE) {
-                creep.moveTo(storage);
+            if (creep.transfer(target, mineralType) == ERR_NOT_IN_RANGE) {
+                creep.moveTo(target);
             }
         }
     }
