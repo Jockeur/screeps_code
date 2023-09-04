@@ -5,7 +5,7 @@ var role = {
         if (!creep.memory.working) {
             if (creep.room.name == creep.memory.target) {
                 var source = creep.room.find(FIND_SOURCES)[0]
-                if(creep.harvest(source) == ERR_NOT_IN_RANGE){
+                if (creep.harvest(source) == ERR_NOT_IN_RANGE) {
                     creep.moveTo(source);
                 }
             } else {
