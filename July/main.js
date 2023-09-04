@@ -180,7 +180,7 @@ module.exports.loop = function () {
         }
 
         if (spawn.room.terminal && (Game.time % 10 == 0)) {
-            if (spawn.room.terminal.store[RESOURCE_ENERGY] == 2000 && spawn.room.terminal.store[RESOURCE_HYDROGEN] == 2000) {
+            if (spawn.room.terminal.store[RESOURCE_ENERGY] >= 2000 && spawn.room.terminal.store[RESOURCE_HYDROGEN] >= 2000) {
                 var orders = Game.market.getAllOrders(order => order.resourceType == RESOURCE_HYDROGEN &&
                     order.type == ORDER_BUY &&
                     Game.market.calcTransactionCost(200, spawn.room.name, order.roomName) == 400);
