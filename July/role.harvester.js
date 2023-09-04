@@ -19,7 +19,7 @@ roleHarvester = {
                 if (creep.transfer(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                     creep.moveTo(target);
                 }
-            } if (terminal.store.energy < terminal.store.getCapacity) {
+            } else if (terminal.store.energy < terminal.store.getCapacity) {
                 if (creep.transfer(terminal, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                     creep.moveTo(terminal);
                 }
