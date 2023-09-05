@@ -24,12 +24,12 @@ StructureSpawn.prototype.spawnCreepsIfNecessary =
         if (numberOfCreeps['harvester'] == 0 && (numberOfCreeps['miner'] == 0 || numberOfCreeps['lorry'] == 0 || numberOfCreeps['mineralLorry'] == 0)) {
             // if there are still miners
             if (numberOfCreeps['miner'] > 0) {
-                name = this.createLorry(this.room.energyAvailable);
+                name = this.spawnLorry(this.room.energyAvailable);
             }
             // if there is no miner
             else {
                 // create a harvester because it can work on its own
-                name = this.createCustomCreep(room.energyAvailable, 'harvester');
+                name = this.spawnCustomCreep(room.energyAvailable, 'harvester');
             }
 
             if (numberOfCreeps['excavator'] > 0) {
@@ -52,7 +52,7 @@ StructureSpawn.prototype.spawnCreepsIfNecessary =
                     // if there is a container next to the source
                     if (containers.length > 0) {
                         // spawn a miner
-                        name = this.createMiner(source.id);
+                        name = this.spawnMiner(source.id);
                         break;
                     }
                 }
@@ -65,7 +65,7 @@ StructureSpawn.prototype.spawnCreepsIfNecessary =
                 // check for claim order
                 if (role == 'claimer' && this.memory.claimRoom != undefined) {
                     // try to spawn a claimer
-                    name = this.createClaimer(this.memory.claimRoom);
+                    name = this.spawnClaimer(this.memory.claimRoom);
                     // if that worked
                     if (name != undefined && _.isString(name)) {
                         // delete the claim order
@@ -75,10 +75,10 @@ StructureSpawn.prototype.spawnCreepsIfNecessary =
                 // if no claim order was found, check other roles
                 else if (numberOfCreeps[role] < this.memory.minCreeps[role]) {
                     if (role == 'lorry') {
-                        name = this.createLorry(this.room.energyAvailable);
+                        name = this.spawnLorry(this.room.energyAvailable);
                     }
                     else {
-                        name = this.createCustomCreep(maxEnergy, role);
+                        name = this.spawnCustomCreep(maxEnergy, role);
                     }
                     break;
                 }
@@ -95,7 +95,7 @@ StructureSpawn.prototype.spawnCreepsIfNecessary =
                     c.memory.role == 'longDistanceHarvester' && c.memory.target == roomName)
 
                 if (numberOfLongDistanceHarvesters[roomName] < this.memory.minLongDistanceHarvesters[roomName]) {
-                    name = this.createLongDistanceHarvester(maxEnergy, 2, room.name, roomName, 0);
+                    name = this.spawnLongDistanceCreep(maxEnergy, 2, room.name, roomName, 0, 'longDistanceHarvester');
                 }
             }
         }
@@ -188,13 +188,13 @@ StructureSpawn.prototype.spawnAttacker =
 
 StructureSpawn.prototype.spawnMiner =
     function (sourceId) {
-        return this.createCreep([WORK, WORK, WORK, WORK, WORK, MOVE, MOVE, MOVE, MOVE], undefined,
+        return this.spawnCreep([WORK, WORK, WORK, WORK, WORK, MOVE, MOVE, MOVE, MOVE], undefined,
             { role: 'miner', sourceId: sourceId });
     };
 
 StructureSpawn.prototype.spawnExcavator =
     function (mineralId) {
-        return this.createCreep([WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE], undefined,
+        return this.spawnCreep([WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE], undefined,
             { role: 'excavator', mineralId: mineralId });
     };
 
