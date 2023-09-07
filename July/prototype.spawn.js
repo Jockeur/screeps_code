@@ -128,7 +128,7 @@ StructureSpawn.prototype.spawnCustomCreep =
         for (let i = 0; i < numberOfParts; i++) {
             body.push(MOVE);
         }
-        return this.spawnCreep(body, undefined, { memory: { role: roleName, working: false } });
+        return this.spawnCreep(body, roleName + Game.time, { memory: { role: roleName, working: false } });
     };
 
 StructureSpawn.prototype.spawnLongDistanceCreep =
