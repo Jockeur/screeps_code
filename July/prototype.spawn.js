@@ -33,7 +33,7 @@ StructureSpawn.prototype.spawnCreepsIfNecessary =
             }
 
             if (numberOfCreeps['excavator'] > 0) {
-                spawn.spawnLorry(spawn.room.energyAvailable, 'mineralLorry' + Game.time, 'mineralLorry', spawn.room.find(FIND_MINERALS)[0].mineralType, creep.room.storage);
+                name = spawn.spawnLorry(spawn.room.energyAvailable, 'mineralLorry' + Game.time, 'mineralLorry', spawn.room.find(FIND_MINERALS)[0].mineralType, creep.room.storage);
             }
         }
         // if no backup creep is required
@@ -128,7 +128,7 @@ StructureSpawn.prototype.spawnCustomCreep =
         for (let i = 0; i < numberOfParts; i++) {
             body.push(MOVE);
         }
-        return this.spawnCreep(body, name, { memory: { role: roleName, working: false } });
+        return this.spawnCreep(body, { memory: { role: roleName, working: false } });
     };
 
 StructureSpawn.prototype.spawnLongDistanceCreep =
