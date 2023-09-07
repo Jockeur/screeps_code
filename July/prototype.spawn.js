@@ -29,7 +29,7 @@ StructureSpawn.prototype.spawnCreepsIfNecessary =
             // if there is no miner
             else {
                 // create a harvester because it can work on its own
-                name = this.spawnCustomCreep(room.energyAvailable, 'harvester', 'harvester');
+                name = this.spawnCustomCreep(room.energyAvailable, 'harvester');
             }
 
             if (numberOfCreeps['excavator'] > 0) {
@@ -113,7 +113,7 @@ StructureSpawn.prototype.spawnCreepsIfNecessary =
     };
 
 StructureSpawn.prototype.spawnCustomCreep =
-    function (energy, name, roleName) {
+    function (energy, roleName) {
         var numberOfParts = Math.floor(energy / 200);
 
         numberOfParts > 5 ? numberOfParts = 5 : numberOfParts = numberOfParts;
