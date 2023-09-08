@@ -189,7 +189,7 @@ StructureSpawn.prototype.spawnAttacker =
 StructureSpawn.prototype.spawnMiner =
     function (sourceId) {
         return this.spawnCreep([WORK, WORK, WORK, WORK, WORK, MOVE, MOVE, MOVE, MOVE], undefined,
-            { role: 'miner', sourceId: sourceId });
+            {memory: { role: 'miner', sourceId: sourceId }});
     };
 
 StructureSpawn.prototype.spawnExcavator =
