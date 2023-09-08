@@ -24,7 +24,7 @@ StructureSpawn.prototype.spawnCreepsIfNecessary =
         if (numberOfCreeps['harvester'] == 0 && (numberOfCreeps['miner'] == 0 || numberOfCreeps['lorry'] == 0 || numberOfCreeps['mineralLorry'] == 0)) {
             // if there are still miners
             if (numberOfCreeps['miner'] > 0) {
-                name = this.spawnLorry(this.room.energyAvailable);
+                name = this.spawnLorry(this.room.energyAvailable, 'lorry' + Game.time, 'lorry');
             }
             // if there is no miner
             else {
@@ -75,7 +75,7 @@ StructureSpawn.prototype.spawnCreepsIfNecessary =
                 // if no claim order was found, check other roles
                 else if (numberOfCreeps[role] < this.memory.minCreeps[role]) {
                     if (role == 'lorry') {
-                        name = this.spawnLorry(this.room.energyAvailable);
+                        name = this.spawnLorry(this.room.energyAvailable, 'lorry' + Game.time, 'lorry');
                     }
                     else {
                         name = this.spawnCustomCreep(maxEnergy, role);
