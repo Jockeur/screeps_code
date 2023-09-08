@@ -216,7 +216,7 @@ StructureSpawn.prototype.spawnLorry =
 
         // create creep with the created body and the role 'lorry'
         if (mineralType == undefined) {
-            return this.spawnCreep(body, newName, { memory: { role: role, working: false } });
+            return this.spawnCreep(body, newName, { memory: { working: false, role: role } });
         } else {
             return this.spawnCreep(body, newName, { memory: { role: role, working: false, mineralType: mineralType, target: target } });
         }
