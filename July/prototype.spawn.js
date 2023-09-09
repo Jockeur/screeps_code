@@ -1,4 +1,4 @@
-var listOfRoles = ['harvester', 'lorry', 'claimer', 'upgrader', 'repairer', 'builder', 'wallRepairer', 'miner', 'excavator', 'mineralLorry'];
+var listOfRoles = ['harvester', 'lorry', 'claimer', 'upgrader', 'repairer', 'factorer', 'builder', 'wallRepairer', 'miner', 'excavator', 'mineralLorry'];
 
 StructureSpawn.prototype.spawnCreepsIfNecessary =
     function () {
@@ -79,6 +79,8 @@ StructureSpawn.prototype.spawnCreepsIfNecessary =
                     } else if(role == 'excavator') {
                         const mineralId = this.room.find(FIND_MINERALS)[0].id;
                         name = this.spawnExcavator(mineralId);
+                    } else if(role == 'factorer') {
+                        name = this.spawnLorry(maxEnergy, 'factorer' + Game.time, 'factorer')
                     }
                     else {
                         name = this.spawnCustomCreep(maxEnergy, role);

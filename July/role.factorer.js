@@ -13,7 +13,7 @@ module.exports = {
                 creep.moveTo(storage);
             }
         } else {
-            var factory = creep.room.find(FIND_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_FACTORY});
+            var factory = creep.room.find(FIND_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_FACTORY})[0];
             if(creep.transfer(factory, RESOURCE_HYDROGEN) == ERR_NOT_IN_RANGE) {
                 creep.moveTo(factory);
             }
