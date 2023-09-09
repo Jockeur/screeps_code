@@ -33,7 +33,7 @@ StructureSpawn.prototype.spawnCreepsIfNecessary =
             }
 
             if (numberOfCreeps['excavator'] > 0) {
-                name = this.spawnLorry(this.room.energyAvailable, 'mineralLorry' + Game.time, 'mineralLorry', this.room.find(FIND_MINERALS)[0].mineralType, creep.room.storage);
+                name = this.spawnLorry(this.room.energyAvailable, 'mineralLorry' + Game.time, 'mineralLorry', this.room.find(FIND_MINERALS)[0].mineralType, this.room.storage);
             }
         }
         // if no backup creep is required
