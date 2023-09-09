@@ -76,6 +76,9 @@ StructureSpawn.prototype.spawnCreepsIfNecessary =
                 else if (numberOfCreeps[role] < this.memory.minCreeps[role]) {
                     if (role == 'lorry') {
                         name = this.spawnLorry(this.room.energyAvailable, 'lorry' + Game.time, 'lorry');
+                    } else if(role == 'excavator') {
+                        const mineralId = this.room.find(FIND_MINERALS)[0].id;
+                        name = this.spawnExcavator(mineralId);
                     }
                     else {
                         name = this.spawnCustomCreep(maxEnergy, role);
