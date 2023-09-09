@@ -19,12 +19,15 @@ roleHarvester = {
                 if (creep.transfer(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                     creep.moveTo(target);
                 }
-            } else if (terminal.store.energy < terminal.store.getCapacity) {
+            } else if (terminal.store.energy < 10000) {
                 if (creep.transfer(terminal, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                     creep.moveTo(terminal);
                 }
             } else {
-                roleBuilder.run(creep);
+                const factory = creep.room.find(FIND_MY_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_FACTORY});
+                if(creep.transfer(factory, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                    creep.moveTo(factory);
+                }
             }
         }
     }
