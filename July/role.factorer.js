@@ -10,7 +10,7 @@ module.exports = {
         }
 
         if (!creep.memory.working) {
-            var storage = creep.room.find(storage);
+            var storage = creep.room.storage;
             if(creep.withdraw(storage, mineralType) == ERR_NOT_IN_RANGE) {
                 creep.moveTo(storage);
             }
