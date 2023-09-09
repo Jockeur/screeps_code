@@ -8,6 +8,7 @@ var roles = {
     claimer: require('role.claimer'),
     miner: require('role.miner'),
     excavator: require('role.excavator'),
+    mineralLorry: require('role.mineralLorry'),
     lorry: require('role.lorry')
 };
 
