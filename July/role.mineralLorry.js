@@ -10,7 +10,7 @@ var role = {
         }
 
         if (!creep.memory.working) {
-            if (target == creep.room.storage) {
+            if (target == creep.room.storage.id) {
                 var container = creep.pos.findClosestByPath(FIND_STRUCTURES, { filter: (s) => s.structureType == STRUCTURE_CONTAINER && s.store[mineralType] > 0 });
                 if (container) {
                     if (creep.withdraw(container, mineralType) == ERR_NOT_IN_RANGE) {

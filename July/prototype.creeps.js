@@ -7,7 +7,7 @@ var roles = {
     longDistanceHarvester: require('role.longDistanceHarvester'),
     claimer: require('role.claimer'),
     miner: require('role.miner'),
-    dealer: require('role.dealer'),
+    factorer: require('role.factorer'),
     excavator: require('role.excavator'),
     mineralLorry: require('role.mineralLorry'),
     lorry: require('role.lorry')
