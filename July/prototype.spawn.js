@@ -80,7 +80,7 @@ StructureSpawn.prototype.spawnCreepsIfNecessary =
                         const mineralId = this.room.find(FIND_MINERALS)[0].id;
                         name = this.spawnExcavator(mineralId);
                     } else if(role == 'factorer') {
-                        name = this.spawnLorry(maxEnergy, 'factorer' + Game.time, 'factorer')
+                        name = this.spawnLorry(maxEnergy, 'factorer' + Game.time, 'factorer', this.room.find(FIND_MINERALS)[0].mineralType)
                     }
                     else {
                         name = this.spawnCustomCreep(maxEnergy, role);
@@ -220,10 +220,12 @@ StructureSpawn.prototype.spawnLorry =
         }
 
         // create creep with the created body and the role 'lorry'
-        if (mineralType == undefined) {
+        if (mineralType == undefined && target == undefined) {
             return this.spawnCreep(body, newName, { memory: { working: false, role: role } });
-        } else {
+        } else if(mineralType && target) {
             return this.spawnCreep(body, newName, { memory: { role: role, working: false, mineralType: mineralType, target: target } });
+        } else if (mineralType){
+            return this.spawnCreep(body, newName, { memory: { working: false, role: role, mineralType: mineralType} });
         }
     };
 
