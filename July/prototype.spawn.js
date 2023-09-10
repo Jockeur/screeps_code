@@ -32,7 +32,7 @@ StructureSpawn.prototype.spawnCreepsIfNecessary =
                 name = this.spawnCustomCreep(room.energyAvailable, 'harvester');
             }
 
-            if (numberOfCreeps['excavator'] > 0) {
+            if (numberOfCreeps['excavator'] > 0 && numberOfCreeps['mineralLorry'] == 0) {
                 name = this.spawnLorry(this.room.energyAvailable, 'mineralLorry' + Game.time, 'mineralLorry', this.room.find(FIND_MINERALS)[0].mineralType, this.room.storage.id);
             }
         }
