@@ -1,6 +1,7 @@
 require('prototype.spawn');
 require('prototype.creeps');
-require('prototype.towers')
+require('prototype.towers');
+require('prototype.factory')
 
 var HOME;
 
