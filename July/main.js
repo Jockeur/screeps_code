@@ -18,6 +18,12 @@ module.exports.loop = function () {
 
         spawn.spawnCreepsIfNecessary();
 
+        var roomMineralType = spawn.room.find(FIND_MINERALS)[0].mineralType;
+
+        var factory = spawn.room.find(FIND_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_FACTORY})[0];
+
+        factory.compact(roomMineralType);
+
         if (spawn.room.terminal && (Game.time % 10 == 0)) {
             if (spawn.room.terminal.store[RESOURCE_ENERGY] >= 2000 && spawn.room.terminal.store[RESOURCE_HYDROGEN] >= 2000) {
                 var orders = Game.market.getAllOrders(order => order.resourceType == RESOURCE_HYDROGEN &&
