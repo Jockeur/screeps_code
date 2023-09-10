@@ -199,7 +199,7 @@ StructureSpawn.prototype.spawnMiner =
 
 StructureSpawn.prototype.spawnExcavator =
     function (mineralId) {
-        return this.spawnCreep([WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE], undefined,
+        return this.spawnCreep([WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE], 'excavator' + Game.time,
             { role: 'excavator', mineralId: mineralId });
     };
 
