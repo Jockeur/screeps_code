@@ -24,7 +24,7 @@ roleHarvester = {
                     creep.moveTo(terminal);
                 }
             } else {
-                const factory = creep.room.find(FIND_MY_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_FACTORY})[0];
+                const factory = creep.room.find(FIND_MY_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_FACTORY && s.store.energy < 10000})[0];
                 if(creep.transfer(factory, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                     creep.moveTo(factory);
                 }
