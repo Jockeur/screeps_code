@@ -1,15 +1,16 @@
 var roles = {
-    harvester: require('role.harvester'),
-    upgrader: require('role.upgrader'),
-    builder: require('role.builder'),
-    repairer: require('role.repairer'),
-    wallRepairer: require('role.wallRepairer'),
     longDistanceHarvester: require('role.longDistanceHarvester'),
-    claimer: require('role.claimer'),
-    miner: require('role.miner'),
-    factorer: require('role.factorer'),
-    excavator: require('role.excavator'),
+    wallRepairer: require('role.wallRepairer'),
     mineralLorry: require('role.mineralLorry'),
+    excavator: require('role.excavator'),
+    harvester: require('role.harvester'),
+    repairer: require('role.repairer'),
+    upgrader: require('role.upgrader'),
+    factorer: require('role.factorer'),
+    builder: require('role.builder'),
+    claimer: require('role.claimer'),
+    dealer: require('role.dealer'),
+    miner: require('role.miner'),
     lorry: require('role.lorry')
 };
 

@@ -1,4 +1,4 @@
-var listOfRoles = ['harvester', 'lorry', 'claimer', 'upgrader', 'repairer', 'factorer', 'builder', 'wallRepairer', 'miner', 'excavator', 'mineralLorry'];
+var listOfRoles = ['harvester', 'lorry', 'dealer', 'claimer', 'upgrader', 'repairer', 'factorer', 'builder', 'wallRepairer', 'miner', 'excavator', 'mineralLorry'];
 
 StructureSpawn.prototype.spawnCreepsIfNecessary =
     function () {
