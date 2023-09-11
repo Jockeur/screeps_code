@@ -9,9 +9,9 @@ module.exports = {
             case RESOURCE_LEMERGIUM: resource = RESOURCE_LEMERGIUM_BAR; break;
         }
 
-        if (creep.store[mineralType] == creep.store.getCapacity(mineralType) && !creep.memory.working) {
+        if (creep.store[resource] == creep.store.getCapacity(resource) && !creep.memory.working) {
             creep.memory.working = true;
-        } else if (creep.store[mineralType] == 0 && creep.memory.working) {
+        } else if (creep.store[resource] == 0 && creep.memory.working) {
             creep.memory.working = false
         }
 
