@@ -81,6 +81,8 @@ StructureSpawn.prototype.spawnCreepsIfNecessary =
                         name = this.spawnExcavator(mineralId);
                     } else if(role == 'factorer') {
                         name = this.spawnLorry(maxEnergy, 'factorer' + Game.time, 'factorer', this.room.find(FIND_MINERALS)[0].mineralType);
+                    } else if(role == 'dealer') {
+                        name = this.spawnLorry(maxEnergy, 'dealer' + Game.time, 'dealer', this.room.find(FIND_MINERALS)[0].mineralType);
                     }
                     else {
                         name = this.spawnCustomCreep(maxEnergy, role);
