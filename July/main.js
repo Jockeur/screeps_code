@@ -29,7 +29,7 @@ module.exports.loop = function () {
         }
 
         if(spawn.room.terminal && Game.time % 10 == 0) { 
-            spawn.roome.terminal.sell(roomMineralType);
+            spawn.room.terminal.sell(roomMineralType);
         }
     }
 
