@@ -4,9 +4,9 @@ StructureTerminal.prototype.sell =
         var resource;
 
         switch (mineralType) {
-            case RESOURCE_HYDROGEN: resource = RESOURCE_REDUCTANT;
-            case RESOURCE_OXYGEN: resource = RESOURCE_OXIDANT;
-            case RESOURCE_LEMERGIUM: resource = RESOURCE_LEMERGIUM_BAR;
+            case RESOURCE_HYDROGEN: resource = RESOURCE_REDUCTANT; break;
+            case RESOURCE_OXYGEN: resource = RESOURCE_OXIDANT; break;
+            case RESOURCE_LEMERGIUM: resource = RESOURCE_LEMERGIUM_BAR; break;
         }
 
         if (this.store[RESOURCE_ENERGY] >= 2000 && this.store[resource] >= 2000) {
