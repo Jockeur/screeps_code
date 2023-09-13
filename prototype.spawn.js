@@ -115,7 +115,7 @@ StructureSpawn.prototype.spawnCreepsIfNecessary =
                 console.log(role + ": " + numberOfCreeps[role]);
             }
             for (let roomName in numberOfLocalBuilders) {
-                console.log("LongDistanceHarvester" + roomName + ": " + numberOfLocalBuilders[roomName]);
+                console.log("LocalBuilders" + roomName + ": " + numberOfLocalBuilders[roomName]);
             }
         }
     };
