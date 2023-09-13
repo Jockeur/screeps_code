@@ -1,4 +1,5 @@
 var listOfRoles = ['harvester', 'lorry', 'dealer', 'claimer', 'upgrader', 'repairer', 'factorer', 'builder', 'wallRepairer', 'miner', 'excavator', 'mineralLorry'];
+var listOfLDC = ['localBuilder'];
 
 StructureSpawn.prototype.spawnCreepsIfNecessary =
     function () {
@@ -76,12 +77,12 @@ StructureSpawn.prototype.spawnCreepsIfNecessary =
                 else if (numberOfCreeps[role] < this.memory.minCreeps[role]) {
                     if (role == 'lorry') {
                         name = this.spawnLorry(this.room.energyAvailable, 'lorry' + Game.time, 'lorry');
-                    } else if(role == 'excavator') {
+                    } else if (role == 'excavator') {
                         const mineralId = this.room.find(FIND_MINERALS)[0].id;
                         name = this.spawnExcavator(mineralId);
-                    } else if(role == 'factorer') {
+                    } else if (role == 'factorer') {
                         name = this.spawnLorry(maxEnergy, 'factorer' + Game.time, 'factorer', this.room.find(FIND_MINERALS)[0].mineralType);
-                    } else if(role == 'dealer') {
+                    } else if (role == 'dealer') {
                         name = this.spawnLorry(maxEnergy, 'dealer' + Game.time, 'dealer', this.room.find(FIND_MINERALS)[0].mineralType);
                     }
                     else {
@@ -94,15 +95,15 @@ StructureSpawn.prototype.spawnCreepsIfNecessary =
 
         // if none of the above caused a spawn command check for LongDistanceHarvesters
         /** @type {Object.<string, number>} */
-        let numberOfLongDistanceHarvesters = {};
+        let numberOfLocalBuilders = {};
         if (name == undefined) {
             // count the number of long distance harvesters globally
-            for (let roomName in this.memory.minLongDistanceHarvesters) {
-                numberOfLongDistanceHarvesters[roomName] = _.sum(Game.creeps, (c) =>
-                    c.memory.role == 'longDistanceHarvester' && c.memory.target == roomName)
+            for (let roomName in this.memory.minLocalBuilders) {
+                numberOfLocalBuilders[roomName] = _.sum(Game.creeps, (c) =>
+                    c.memory.role == 'localBuilder' && c.memory.target == roomName)
 
-                if (numberOfLongDistanceHarvesters[roomName] < this.memory.minLongDistanceHarvesters[roomName]) {
-                    name = this.spawnLongDistanceCreep(maxEnergy, 2, room.name, roomName, 0, 'longDistanceHarvester');
+                if (numberOfLocalBuilders[roomName] < this.memory.minLocalBuilders[roomName]) {
+                    name = this.spawnLDC(maxEnergy, 'localBuilder' + Game.time, 'localBuilder', 4, room.name, roomName, 0);
                 }
             }
         }
@@ -113,8 +114,8 @@ StructureSpawn.prototype.spawnCreepsIfNecessary =
             for (let role of listOfRoles) {
                 console.log(role + ": " + numberOfCreeps[role]);
             }
-            for (let roomName in numberOfLongDistanceHarvesters) {
-                console.log("LongDistanceHarvester" + roomName + ": " + numberOfLongDistanceHarvesters[roomName]);
+            for (let roomName in numberOfLocalBuilders) {
+                console.log("LongDistanceHarvester" + roomName + ": " + numberOfLocalBuilders[roomName]);
             }
         }
     };
@@ -138,8 +139,8 @@ StructureSpawn.prototype.spawnCustomCreep =
         return this.spawnCreep(body, roleName + Game.time, { memory: { role: roleName, working: false } });
     };
 
-StructureSpawn.prototype.spawnLongDistanceCreep =
-    function (energy, name, nbWorkParts, home, target, sourceIndex, role) {
+StructureSpawn.prototype.spawnLDC =
+    function (energy, name, role, nbWorkParts, home, target, sourceIndex) {
         var body = [];
         for (let i = 0; i < nbWorkParts; i++) {
             body.push(WORK);
@@ -196,13 +197,15 @@ StructureSpawn.prototype.spawnAttacker =
 StructureSpawn.prototype.spawnMiner =
     function (sourceId) {
         return this.spawnCreep([WORK, WORK, WORK, WORK, WORK, MOVE, MOVE, MOVE, MOVE], 'miner' + Game.time,
-            {memory: { role: 'miner', sourceId: sourceId }});
+            { memory: { role: 'miner', sourceId: sourceId } });
     };
 
 StructureSpawn.prototype.spawnExcavator =
     function (mineralId) {
-        return this.spawnCreep([WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE], 'excavator' + Game.time, {memory:
-            { role: 'excavator', mineralId: mineralId }});
+        return this.spawnCreep([WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE], 'excavator' + Game.time, {
+            memory:
+                { role: 'excavator', mineralId: mineralId }
+        });
     };
 
 
@@ -224,10 +227,10 @@ StructureSpawn.prototype.spawnLorry =
         // create creep with the created body and the role 'lorry'
         if (mineralType == undefined && target == undefined) {
             return this.spawnCreep(body, newName, { memory: { working: false, role: role } });
-        } else if(mineralType && target) {
+        } else if (mineralType && target) {
             return this.spawnCreep(body, newName, { memory: { role: role, working: false, mineralType: mineralType, target: target } });
-        } else if (mineralType){
-            return this.spawnCreep(body, newName, { memory: { working: false, role: role, mineralType: mineralType} });
+        } else if (mineralType) {
+            return this.spawnCreep(body, newName, { memory: { working: false, role: role, mineralType: mineralType } });
         }
     };
 
