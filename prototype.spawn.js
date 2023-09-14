@@ -24,7 +24,7 @@ StructureSpawn.prototype.spawnCreepsIfNecessary =
         //  create a backup creep
         if (numberOfCreeps['harvester'] == 0 && (numberOfCreeps['miner'] == 0 || numberOfCreeps['lorry'] == 0 || numberOfCreeps['mineralLorry'] == 0)) {
             // if there are still miners
-            if (numberOfCreeps['miner'] > 0) {
+            if (numberOfCreeps['miner'] > 0 && numberOfCreeps['lorry'] == 0) {
                 name = this.spawnLorry(this.room.energyAvailable, 'lorry' + Game.time, 'lorry');
             }
             // if there is no miner
