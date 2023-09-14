@@ -28,7 +28,7 @@ StructureSpawn.prototype.spawnCreepsIfNecessary =
                 name = this.spawnLorry(this.room.energyAvailable, 'lorry' + Game.time, 'lorry');
             }
             // if there is no miner
-            else {
+            else if(numberOfCreeps['miner'] == 0) {
                 // create a harvester because it can work on its own
                 name = this.spawnCustomCreep(room.energyAvailable, 'harvester');
             }
