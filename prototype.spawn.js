@@ -22,7 +22,7 @@ StructureSpawn.prototype.spawnCreepsIfNecessary =
 
         // if no harvesters are left AND either no miners or no lorries are left
         //  create a backup creep
-        if (numberOfCreeps['harvester'] == 0 && (numberOfCreeps['miner'] == 0 || numberOfCreeps['lorry'] == 0 || numberOfCreeps['mineralLorry'] == 0)) {
+        if (numberOfCreeps['harvester'] == 0 && (numberOfCreeps['miner'] == 0 || numberOfCreeps['lorry'] == 0)) {
             // if there are still miners
             if (numberOfCreeps['miner'] > 0 && numberOfCreeps['lorry'] == 0) {
                 name = this.spawnLorry(this.room.energyAvailable, 'lorry' + Game.time, 'lorry');
@@ -31,10 +31,6 @@ StructureSpawn.prototype.spawnCreepsIfNecessary =
             else if(numberOfCreeps['miner'] == 0) {
                 // create a harvester because it can work on its own
                 name = this.spawnCustomCreep(room.energyAvailable, 'harvester');
-            }
-
-            if (numberOfCreeps['excavator'] > 0 && numberOfCreeps['mineralLorry'] == 0) {
-                name = this.spawnLorry(this.room.energyAvailable, 'mineralLorry' + Game.time, 'mineralLorry', this.room.find(FIND_MINERALS)[0].mineralType, this.room.storage.id);
             }
         }
         // if no backup creep is required
@@ -51,6 +47,7 @@ StructureSpawn.prototype.spawnCreepsIfNecessary =
                         filter: s => s.structureType == STRUCTURE_CONTAINER
                     });
                     // if there is a container next to the source
+                    console.log(containers.length)
                     if (containers.length > 0) {
                         // spawn a miner
                         name = this.spawnMiner(source.id);
@@ -59,6 +56,8 @@ StructureSpawn.prototype.spawnCreepsIfNecessary =
                 }
             }
         }
+        
+        if(numberOfCreeps['mineralLorry'] == 0 && numberOfCreeps['extractor'] > 0) name = this.spawnLorry(this.room.energyAvailable, 'mineralLorry' + Game.time, 'mineralLorry', this.room.find(FIND_MINERALS)[0].mineralType, this.room.storage.id);
 
         // if none of the above caused a spawn command check for other roles
         if (name == undefined) {
