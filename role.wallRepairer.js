@@ -2,10 +2,7 @@ var roleBuilder = require('role.builder');
 var roleWallRepairer = {
     run: function (creep) {
         if (!creep.memory.working) {
-            var source = creep.pos.findClosestByPath(FIND_SOURCES);
-            if (creep.harvest(source) == ERR_NOT_IN_RANGE) {
-                creep.moveTo(source);
-            }
+            creep.getEnergy(true, false)
         } else {
             var walls = creep.room.find(FIND_STRUCTURES, (s) => s.structureType == STRUCTURE_RAMPART || s.structureType == STRUCTURE_WALL);
             var target = undefined;
