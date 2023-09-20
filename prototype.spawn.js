@@ -57,7 +57,7 @@ StructureSpawn.prototype.spawnCreepsIfNecessary =
             }
         }
         
-        if(numberOfCreeps['mineralLorry'] == 0 && numberOfCreeps['extractor'] > 0) name = this.spawnLorry(this.room.energyAvailable, 'mineralLorry' + Game.time, 'mineralLorry', this.room.find(FIND_MINERALS)[0].mineralType, this.room.storage.id);
+        if(numberOfCreeps['mineralLorry'] == 0 && numberOfCreeps['excavator'] > 0) name = this.spawnLorry(this.room.energyAvailable, 'mineralLorry' + Game.time, 'mineralLorry', this.room.find(FIND_MINERALS)[0].mineralType, this.room.storage.id);
 
         // if none of the above caused a spawn command check for other roles
         if (name == undefined) {
