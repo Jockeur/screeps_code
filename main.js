@@ -27,9 +27,9 @@ module.exports.loop = function () {
 
         const links = spawn.room.find(FIND_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_LINK});
 
-        for (link in links){
+        for (link of links){
             const id = link.id
-            console.log(id)
+            Memory.rooms[HOME].structures.links[id] = {pos: link.pos, state: undefined};
         }
 
         if(factory) {
