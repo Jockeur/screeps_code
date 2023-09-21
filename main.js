@@ -19,6 +19,8 @@ module.exports.loop = function () {
 
         HOME = spawn.room.name;
 
+        Memory.rooms[HOME] = {structures: {}}
+
         spawn.spawnCreepsIfNecessary();
 
         var roomMineralType = spawn.room.find(FIND_MINERALS)[0].mineralType;
@@ -31,13 +33,6 @@ module.exports.loop = function () {
 
         if(spawn.room.terminal && Game.time % 10 == 0) { 
             spawn.room.terminal.sell(roomMineralType);
-        }
-        
-        const links = spawn.room.find(FIND_MY_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_LINK});
-
-        for(link of links) {
-            var id = link.id;
-            Memory.structures.links.id = link;
         }
     }
 
