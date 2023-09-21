@@ -1,8 +1,9 @@
 StructureLink.prototype.transfer =
     function () {
-        var state = this.memory.state
+        const room = this.room.name
+        var memory = Memory.rooms[room].structures.links[this.id]
         if(state == 'transfer') {
-            var targetId = this.memory.targetId
+            const targetId = memory.targetId
             var linkTo = Game.getObjectById(targetId)
             this.transferEnergy(linkTo)
         }
