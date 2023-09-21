@@ -19,13 +19,18 @@ module.exports.loop = function () {
 
         HOME = spawn.room.name;
 
-        Memory.rooms[HOME] = {structures: {}}
-
         spawn.spawnCreepsIfNecessary();
 
         var roomMineralType = spawn.room.find(FIND_MINERALS)[0].mineralType;
 
         var factory = spawn.room.find(FIND_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_FACTORY})[0];
+
+        const links = spawn.room.find(FIND_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_LINK});
+
+        for (link in links){
+            const id = link.id
+            Memory.rooms[HOME].structures.links[id] = {pos: link.pos, state: undefined};
+        }
 
         if(factory) {
             factory.compact(roomMineralType)
