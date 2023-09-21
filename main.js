@@ -29,7 +29,7 @@ module.exports.loop = function () {
 
         for (link in links){
             const id = link.id
-            Memory.rooms[HOME].structures.links[id] = {};
+            console.log(id)
         }
 
         if(factory) {
