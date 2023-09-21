@@ -47,7 +47,6 @@ StructureSpawn.prototype.spawnCreepsIfNecessary =
                         filter: s => s.structureType == STRUCTURE_CONTAINER
                     });
                     // if there is a container next to the source
-                    console.log(containers.length)
                     if (containers.length > 0) {
                         // spawn a miner
                         name = this.spawnMiner(source.id);

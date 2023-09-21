@@ -32,7 +32,7 @@ module.exports.loop = function () {
             const memory = Memory.rooms[HOME].structures.links[id];
             if(memory && memory.state == 'send'){
                 link.transfer()
-            } else {
+            } else if(!memory) {
                 Memory.rooms[HOME].structures.links[id] = {pos: link.pos, state: '', target: ''};
                 console.log('added link ' + id + ' to room ' + HOME);
             }
