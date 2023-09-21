@@ -30,10 +30,13 @@ module.exports.loop = function () {
         for (link of links){
             const id = link.id
             const memory = Memory.rooms[HOME].structures.links[id];
-            if(memory == undefined) {
+            if(memory && memory.state == 'send'){
+                link.transfer()
+            } else {
                 Memory.rooms[HOME].structures.links[id] = {pos: link.pos, state: '', target: ''};
                 console.log('added link ' + id + ' to room ' + HOME);
             }
+
         }
 
         if(factory) {
