@@ -3,7 +3,7 @@ require('prototype.creeps');
 require('prototype.towers');
 require('prototype.factory');
 require('prototype.terminal');
-
+require('prototype.link');
 
 var HOME;
 

@@ -44,7 +44,7 @@ StructureSpawn.prototype.spawnCreepsIfNecessary =
                     // check whether or not the source has a container
                     /** @type {Array.StructureContainer} */
                     let containers = source.pos.findInRange(FIND_STRUCTURES, 1, {
-                        filter: s => s.structureType == STRUCTURE_CONTAINER
+                        filter: s => s.structureType == STRUCTURE_CONTAINER || s.structureType == STRUCTURE_LINK
                     });
                     // if there is a container next to the source
                     if (containers.length > 0) {
