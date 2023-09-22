@@ -6,7 +6,7 @@ roleUpgrader = {
                 creep.moveTo(controller);
             }
         } else {
-            creep.getEnergy(true, true, false);
+            creep.getEnergy(false, true, false);
         }
     }
 };
