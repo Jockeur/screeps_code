@@ -19,6 +19,14 @@ module.exports.loop = function () {
 
         HOME = spawn.room.name;
 
+        roomMem = Memory.rooms[HOME]
+
+        for(let id in roomMem.structures.links) {
+            if(!Game.getObjectById(id)) {
+                delete Memory.rooms[HOME].structures.links.id;
+            }
+        }
+
         spawn.spawnCreepsIfNecessary();
 
         var roomMineralType = spawn.room.find(FIND_MINERALS)[0].mineralType;
