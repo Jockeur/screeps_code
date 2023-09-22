@@ -38,7 +38,7 @@ module.exports.loop = function () {
         for (link of links){
             const id = link.id
             const memory = Memory.rooms[HOME].structures.links[id];
-            if(memory && memory.state == 'send' && link.store.energy == link.store.getCapacity()){
+            if(memory && memory.state == 'send' && link.store.energy == link.store.getCapacity(RESOURCE_ENERGY)){
                 link.transfer()
             } else if(!memory) {
                 Memory.rooms[HOME].structures.links[id] = {pos: link.pos, state: '', target: ''};
