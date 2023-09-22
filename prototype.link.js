@@ -7,6 +7,6 @@ StructureLink.prototype.transfer =
         var linkTo;
         for(target of targets) {
             var linkTo = Game.getObjectById(target);
-            this.transferEnergy(linkTo, this.store.energy/length);
+            this.transferEnergy(linkTo);
         }
     }
