@@ -47,7 +47,7 @@ Creep.prototype.getEnergy =
             link = this.pos.findClosestByPath(FIND_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_LINK});
             if(link) {
                 if(this.withdraw(link, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                    creep.moveTo(link);
+                    this.moveTo(link);
                 }
             }
         }
