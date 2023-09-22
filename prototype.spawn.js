@@ -28,7 +28,7 @@ StructureSpawn.prototype.spawnCreepsIfNecessary =
                 name = this.spawnLorry(this.room.energyAvailable, 'lorry' + Game.time, 'lorry');
             }
             // if there is no miner
-            else if(numberOfCreeps['miner'] == 0) {
+            else if (numberOfCreeps['miner'] == 0) {
                 // create a harvester because it can work on its own
                 name = this.spawnCustomCreep(room.energyAvailable, 'harvester');
             }
@@ -55,8 +55,8 @@ StructureSpawn.prototype.spawnCreepsIfNecessary =
                 }
             }
         }
-        
-        if(numberOfCreeps['mineralLorry'] == 0 && numberOfCreeps['excavator'] > 0) name = this.spawnLorry(this.room.energyAvailable, 'mineralLorry' + Game.time, 'mineralLorry', this.room.find(FIND_MINERALS)[0].mineralType, this.room.storage.id);
+
+        if (numberOfCreeps['mineralLorry'] == 0 && numberOfCreeps['excavator'] > 0) name = this.spawnLorry(this.room.energyAvailable, 'mineralLorry' + Game.time, 'mineralLorry', this.room.find(FIND_MINERALS)[0].mineralType, this.room.storage.id);
 
         // if none of the above caused a spawn command check for other roles
         if (name == undefined) {
@@ -82,9 +82,9 @@ StructureSpawn.prototype.spawnCreepsIfNecessary =
                         name = this.spawnLorry(maxEnergy, 'factorer' + Game.time, 'factorer', this.room.find(FIND_MINERALS)[0].mineralType);
                     } else if (role == 'dealer') {
                         name = this.spawnLorry(maxEnergy, 'dealer' + Game.time, 'dealer', this.room.find(FIND_MINERALS)[0].mineralType);
-                    } else if(role == 'linker') [
+                    } else if (role == 'linker') {
                         name = this.spawnLorry(maxEnergy, 'linker' + Game.time, 'linker')
-                    ]
+                    }
                     else {
                         name = this.spawnCustomCreep(maxEnergy, role);
                     }
