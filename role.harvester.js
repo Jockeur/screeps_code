@@ -2,7 +2,7 @@ var roleBuilder = require('role.builder');
 roleHarvester = {
     run: function (creep) {
         if (!creep.memory.working) {
-            creep.getEnergy(false, true)
+            creep.getEnergy(false, false, true)
         } else {
             var target = creep.pos.findClosestByPath(FIND_MY_STRUCTURES, {
                 filter: (s) =>

@@ -3,7 +3,7 @@ roleLongDistanceRepairer = require('role.longDistanceRepairer');
 var roleBuilder = {
     run: function (creep) {
         if (!creep.memory.working) {
-            creep.getEnergy(true, false);
+            creep.getEnergy(true, false, false);
         } else {
             site = creep.pos.findClosestByPath(FIND_CONSTRUCTION_SITES);
             if (creep.build(site) == ERR_NOT_IN_RANGE) {

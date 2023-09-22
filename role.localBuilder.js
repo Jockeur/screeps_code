@@ -4,7 +4,7 @@ var role = {
     run: function (creep) {
         if (!creep.memory.working) {
             if (creep.room.name == creep.memory.target) {
-                creep.getEnergy(false, true)
+                creep.getEnergy(false, false, true)
             } else {
                 var exit = creep.room.findExitTo(creep.memory.target);
                 creep.moveTo(creep.pos.findClosestByRange(exit), { visualizePathStyle: { stroke: '#ffffff' } });

@@ -22,9 +22,10 @@ Creep.prototype.runRole =
     };
 
 Creep.prototype.getEnergy =
-    function (useContainer, useSource) {
+    function (useContainer, useLink, useSource) {
         /** @type {StructureContainer} */
         let container;
+        let link;
         // if the Creep should look for containers
         if (useContainer) {
             // find closest container
@@ -33,11 +34,20 @@ Creep.prototype.getEnergy =
                     s.store[RESOURCE_ENERGY] > 0
             });
             // if one was found
-            if (container != undefined) {
+            if (container) {
                 // try to withdraw energy, if the container is not in range
                 if (this.withdraw(container, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                     // move towards it
                     this.moveTo(container);
+                }
+            }
+        }
+
+        if(useLink) {
+            link = this.pos.findClosestByPath(FIND_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_LINK});
+            if(link) {
+                if(this.withdraw(link, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                    creep.moveTo(link);
                 }
             }
         }

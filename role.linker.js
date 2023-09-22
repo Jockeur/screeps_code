@@ -6,7 +6,7 @@ module.exports = {
                 creep.moveTo(link);
             }
         } else {
-            creep.getEnergy(true, false);
+            creep.getEnergy(true, false, false);
         }
     }
 }
