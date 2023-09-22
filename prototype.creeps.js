@@ -26,8 +26,21 @@ Creep.prototype.getEnergy =
         /** @type {StructureContainer} */
         let container;
         let link;
+
+        var moving = 0
+
+        if(useLink) {
+            link = this.pos.findClosestByPath(FIND_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_LINK && s.store.energy > 0});
+            if(link) {
+                if(this.withdraw(link, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                    this.moveTo(link);
+                    moving = 1;
+                }
+            }
+        }
+
         // if the Creep should look for containers
-        if (useContainer) {
+        if (useContainer && moving == 0) {
             // find closest container
             container = this.pos.findClosestByPath(FIND_STRUCTURES, {
                 filter: s => (s.structureType == STRUCTURE_CONTAINER || s.structureType == STRUCTURE_STORAGE) &&
@@ -39,15 +52,7 @@ Creep.prototype.getEnergy =
                 if (this.withdraw(container, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                     // move towards it
                     this.moveTo(container);
-                }
-            }
-        }
-
-        if(useLink) {
-            link = this.pos.findClosestByPath(FIND_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_LINK && s.store.energy > 0});
-            if(link) {
-                if(this.withdraw(link, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                    this.moveTo(link);
+                    moving = 1;
                 }
             }
         }
