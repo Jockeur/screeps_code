@@ -30,7 +30,7 @@ Creep.prototype.getEnergy =
         var moving = 0
 
         if(useLink) {
-            link = this.pos.findClosestByPath(FIND_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_LINK && s.store.energy > 0 && memory.rooms[this.room.name].structures.links[s.id].state == 'recieve'});
+            link = this.pos.findClosestByPath(FIND_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_LINK && s.store.energy > 0 && Memory.rooms[this.room.name].structures.links[s.id].state == 'recieve'});
             if(link) {
 
                 if(this.withdraw(link, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
