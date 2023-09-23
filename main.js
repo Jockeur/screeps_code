@@ -41,7 +41,7 @@ module.exports.loop = function () {
             if(memory && memory.state == 'send'){
                 link.transfer()
             } else if(!memory) {
-                Memory.rooms[HOME].structures.links[id] = {pos: link.pos, state: '', target: []};
+                Memory.rooms[HOME].structures.links[id] = {pos: link.pos, state: '', targets: []};
                 console.log('added link ' + id + ' to room ' + HOME);
             }
 
