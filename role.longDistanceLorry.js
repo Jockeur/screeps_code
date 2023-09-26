@@ -1,13 +1,20 @@
 var role = {
     run: function (creep) {
+        var mineralType = creep.memory.resourceType
+
+        if (creep.store[mineralType] == creep.store.getCapacity(mineralType) && !creep.memory.working) {
+            creep.memory.working = true;
+        } else if (creep.store[mineralType] == 0 && creep.memory.working) {
+            creep.memory.working = false
+        }
+
         if (!creep.memory.working) {
             if (creep.room.name == creep.memory.target) {
-                if (!creep.memory.resourceType) {
-                    const mineralType = creep.room.find(FIND_MINERALS)[0].mineralType;
-                    creep.memory.resourceType = mineralType
+                if (!mineralType) {
+                    mineralType = creep.room.find(FIND_MINERALS)[0].mineralType;
                 } else {
                     const storage = creep.room.storage
-                    if (creep.withdraw(storage, creep.memory.resourceType) == ERR_NOT_IN_RANGE) {
+                    if (creep.withdraw(storage, mineralType) == ERR_NOT_IN_RANGE) {
                         creep.moveTo(storage);
                     }
                 }
