@@ -11,7 +11,7 @@ var role = {
         if (!creep.memory.working) {
             if (creep.room.name == creep.memory.target) {
                 if (!mineralType) {
-                    mineralType = creep.room.find(FIND_MINERALS)[0].mineralType;
+                    creep.memory.resourceType = creep.room.find(FIND_MINERALS)[0].mineralType;
                 } else {
                     const storage = creep.room.storage
                     if (creep.withdraw(storage, mineralType) == ERR_NOT_IN_RANGE) {
