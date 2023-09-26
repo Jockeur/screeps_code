@@ -1,5 +1,6 @@
 var roles = {
     longDistanceHarvester: require('role.longDistanceHarvester'),
+    longDistanceLorry: require('role.longDistanceLorry'),
     wallRepairer: require('role.wallRepairer'),
     mineralLorry: require('role.mineralLorry'),
     localBuilder: require('role.localBuilder'),
