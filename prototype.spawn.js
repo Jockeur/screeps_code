@@ -99,10 +99,10 @@ StructureSpawn.prototype.spawnCreepsIfNecessary =
         if (name == undefined) {
             // count the number of long distance harvesters globally
             for (let roomName in this.memory.minLocalBuilders) {
-                numberOfLDL[roomName] = _.sum(Game.creeps, (c) =>
+                numberOfLocalBuilders[roomName] = _.sum(Game.creeps, (c) =>
                     c.memory.role == 'localBuilder' && c.memory.target == roomName)
 
-                if (numberOfLDL[roomName] < this.memory.minLocalBuilders[roomName]) {
+                if (numberOfLocalBuilders[roomName] < this.memory.minLocalBuilders[roomName]) {
                     name = this.spawnLDC(maxEnergy, 'localBuilder' + Game.time, 'localBuilder', 4, room.name, roomName, 0);
                 }
             }
