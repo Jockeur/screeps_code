@@ -34,6 +34,7 @@ module.exports.loop = function () {
         var factory = spawn.room.find(FIND_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_FACTORY})[0];
 
         const links = spawn.room.find(FIND_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_LINK});
+        const labs = spawn.room.find(FIND_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_LAB});
 
         for (link of links){
             const id = link.id
@@ -44,7 +45,20 @@ module.exports.loop = function () {
                 Memory.rooms[HOME].structures.links[id] = {pos: link.pos, state: '', targets: []};
                 console.log('added link ' + id + ' to room ' + HOME);
             }
+        }
 
+        for (lab of labs) {
+            const id = lab.id
+            const memory = Memory.rooms[HOME].structures.labs[id];
+            if(memory && memory.state == reacting) {
+                const targets = memory.targets
+                lab0 = Game.getObjectById(targets[0]);
+                lab1 = Game.getObjectById(targets[1]);
+                lab.runReaction(lab0, lab1);
+            } else {
+                Memory.roome[HOME].structures.labs[id] = {state: '', targets: []};
+                console.log('added lab ' + id + ' to room ' + HOME);
+            }
         }
 
         if(factory) {
