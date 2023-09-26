@@ -263,7 +263,7 @@ StructureSpawn.prototype.spawnLDL =
         for (let i = 0; i < numberOfParts; i++) {
             body.push(MOVE);
         }
-        return this.spawnCreep(body, 'LDL' + Game.time, { memory: { working: false, role: longDistanceLorry, home: home, target: target, mineralType: undefined } });
+        return this.spawnCreep(body, 'LDL' + Game.time, { memory: { working: false, role: 'longDistanceLorry', home: home, target: target, mineralType: undefined } });
 
     };
 
