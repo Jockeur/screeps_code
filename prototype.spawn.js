@@ -95,7 +95,7 @@ StructureSpawn.prototype.spawnCreepsIfNecessary =
 
         // if none of the above caused a spawn command check for LongDistanceHarvesters
         /** @type {Object.<string, number>} */
-        let numberOfLDL = {};
+        let numberOfLocalBuilders = {};
         if (name == undefined) {
             // count the number of long distance harvesters globally
             for (let roomName in this.memory.minLocalBuilders) {
