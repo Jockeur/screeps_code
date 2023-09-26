@@ -50,7 +50,7 @@ module.exports.loop = function () {
         for (lab of labs) {
             const id = lab.id
             const memory = Memory.rooms[HOME].structures.labs[id];
-            if(memory && memory.state == reacting) {
+            if(memory && memory.state == 'reacting') {
                 const targets = memory.targets
                 lab0 = Game.getObjectById(targets[0]);
                 lab1 = Game.getObjectById(targets[1]);
