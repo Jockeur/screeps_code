@@ -24,7 +24,7 @@ var role = {
             }
         } else {
             if (creep.room.name == creep.memory.home) {
-                if (creep.tranfer(creep.room.storage, resourceType) == ERR_NOT_IN_RANGE) {
+                if (creep.tranfer(creep.room.storage, mineralType) == ERR_NOT_IN_RANGE) {
                     creep.moveTo(creep.room.storage);
                 }
             } else {
