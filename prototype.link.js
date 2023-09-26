@@ -4,7 +4,7 @@ StructureLink.prototype.transfer =
         var memory = Memory.rooms[room].structures.links[this.id]
         const targets = memory.targets
         var linkTo;
-        for(target of targets) {
+        for(let target of targets) {
             var linkTo = Game.getObjectById(target);
             this.transferEnergy(linkTo);
         }

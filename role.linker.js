@@ -1,7 +1,7 @@
 module.exports = {
     run: function(creep) {
         if(creep.memory.working) {
-            const link = creep.pos.findClosestByPath(FIND_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_LINK});
+            const link = creep.pos.findClosestByPath(FIND_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_LINK && s.store.energy < s.store.getCapacity()});
             if(creep.transfer(link, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                 creep.moveTo(link);
             }
