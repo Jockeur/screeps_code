@@ -249,6 +249,24 @@ StructureSpawn.prototype.spawnLorry =
         }
     };
 
+StructureSpawn.prototype.spawnLDL =
+    function (energy, home, target) {
+        // create a body with twice as many CARRY as MOVE parts
+        var numberOfParts = Math.floor(energy / 150);
+
+        numberOfParts > 5 ? numberOfParts = 5 : numberOfParts = numberOfParts
+
+        var body = [];
+        for (let i = 0; i < numberOfParts; i++) {
+            body.push(CARRY);
+        }
+        for (let i = 0; i < numberOfParts; i++) {
+            body.push(MOVE);
+        }
+        return this.spawnCreep(body, newName, { memory: { working: false, role: role, home: home, target: target, mineralType: undefined } });
+
+    };
+
 StructureSpawn.prototype.spawnClaimer =
     function (target) {
         var body = [CLAIM, MOVE, MOVE, MOVE];
