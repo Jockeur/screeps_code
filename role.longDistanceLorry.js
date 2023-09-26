@@ -1,5 +1,3 @@
-var mineralLorry = require('role.mineralLorry')
-
 var role = {
     run: function (creep) {
         if (!creep.memory.working) {
