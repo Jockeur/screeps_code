@@ -95,15 +95,30 @@ StructureSpawn.prototype.spawnCreepsIfNecessary =
 
         // if none of the above caused a spawn command check for LongDistanceHarvesters
         /** @type {Object.<string, number>} */
-        let numberOfLocalBuilders = {};
+        let numberOfLDL = {};
         if (name == undefined) {
             // count the number of long distance harvesters globally
             for (let roomName in this.memory.minLocalBuilders) {
-                numberOfLocalBuilders[roomName] = _.sum(Game.creeps, (c) =>
+                numberOfLDL[roomName] = _.sum(Game.creeps, (c) =>
                     c.memory.role == 'localBuilder' && c.memory.target == roomName)
 
-                if (numberOfLocalBuilders[roomName] < this.memory.minLocalBuilders[roomName]) {
+                if (numberOfLDL[roomName] < this.memory.minLocalBuilders[roomName]) {
                     name = this.spawnLDC(maxEnergy, 'localBuilder' + Game.time, 'localBuilder', 4, room.name, roomName, 0);
+                }
+            }
+        }
+
+        // if none of the above caused a spawn command check for LongDistanceHarvesters
+        /** @type {Object.<string, number>} */
+        let numberOfLDL = {};
+        if (name == undefined) {
+            // count the number of long distance harvesters globally
+            for (let roomName in this.memory.minLDL) {
+                numberOfLDL[roomName] = _.sum(Game.creeps, (c) =>
+                    c.memory.role == 'longDistanceLorry' && c.memory.target == roomName)
+
+                if (numberOfLDL[roomName] < this.memory.minLDL[roomName]) {
+                    name = this.spawnLDL(maxEnergy, room.name, roomName);
                 }
             }
         }
@@ -114,8 +129,8 @@ StructureSpawn.prototype.spawnCreepsIfNecessary =
             for (let role of listOfRoles) {
                 console.log(role + ": " + numberOfCreeps[role]);
             }
-            for (let roomName in numberOfLocalBuilders) {
-                console.log("LocalBuilders" + roomName + ": " + numberOfLocalBuilders[roomName]);
+            for (let roomName in numberOfLDL) {
+                console.log("LocalBuilders" + roomName + ": " + numberOfLDL[roomName]);
             }
         }
     };
