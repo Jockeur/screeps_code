@@ -56,7 +56,7 @@ module.exports.loop = function () {
                 lab1 = Game.getObjectById(targets[1]);
                 lab.runReaction(lab0, lab1);
             } else {
-                Memory.roome[HOME].structures.labs[id] = {state: '', targets: []};
+                Memory.rooms[HOME].structures.labs[id] = {state: '', targets: []};
                 console.log('added lab ' + id + ' to room ' + HOME);
             }
         }
