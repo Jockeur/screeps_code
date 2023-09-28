@@ -4,6 +4,7 @@ var roles = {
     wallRepairer: require('role.wallRepairer'),
     mineralLorry: require('role.mineralLorry'),
     localBuilder: require('role.localBuilder'),
+    scientist: require('role.scientist'),
     excavator: require('role.excavator'),
     harvester: require('role.harvester'),
     repairer: require('role.repairer'),
