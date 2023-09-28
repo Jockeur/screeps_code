@@ -13,7 +13,7 @@ module.exports = {
                 creep.moveTo(storage);
             }
         } else {
-            const labs = creep.room.find(labs);
+            const labs = creep.room.find(FIND_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_LAB});
             let target;
             for (let lab of labs) {
                 var memory = memory.rooms[creep.room.name].structures.labs[lab.id]
