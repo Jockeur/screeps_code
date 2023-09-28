@@ -16,7 +16,7 @@ module.exports = {
             const labs = creep.room.find(FIND_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_LAB});
             let target;
             for (let lab of labs) {
-                var memory = memory.rooms[creep.room.name].structures.labs[lab.id]
+                var memory = Memory.rooms[creep.room.name].structures.labs[lab.id]
                 if(memory.state == 'sending' && memory.materialType == materialType) {
                     target = Game.findObjectById(lab.id);
                     break;
