@@ -8,7 +8,7 @@ module.exports = {
             creep.memory.working = false
         }
 
-        if(creep.memory.working) {
+        if(!creep.memory.working) {
             if(creep.withdraw(storage, mineralType)) {
                 creep.moveTo(storage);
             }
