@@ -95,11 +95,12 @@ StructureSpawn.prototype.spawnCreepsIfNecessary =
         let nbScientist = {};
         if (name == undefined) {
             for (let mineralType in this.memory.minCreeps.scientist) {
-                nbScientist[mineralType] = _.sum(numberOfCreeps['scientist'], (c) =>
-                c.memory.mineralType == mineralType);
+                nbScientist[mineralType] = _.sum(creepsInRoom, (c) =>
+                    c.memory.role == 'scientist' &&
+                    c.memory.mineralType == mineralType);
 
-                if(nbScientist[mineralType] < this.memory.minCreeps.scientist[mineralType]){
-                    name = this.spawnLorry(maxEnergy, 'scientist'+Game.time, 'scientist', mineralType);
+                if (nbScientist[mineralType] < this.memory.minCreeps.scientist[mineralType]) {
+                    name = this.spawnLorry(maxEnergy, 'scientist' + Game.time, 'scientist', mineralType);
                 }
             }
         }
