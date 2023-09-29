@@ -1,4 +1,4 @@
-var listOfRoles = ['harvester', 'lorry', 'dealer', 'claimer', 'upgrader', 'repairer', 'factorer', 'builder', 'wallRepairer', 'miner', 'excavator', 'mineralLorry', 'linker'];
+var listOfRoles = ['harvester', 'lorry', 'dealer', 'claimer', 'upgrader', 'repairer', 'factorer', 'builder', 'wallRepairer', 'miner', 'excavator', 'mineralLorry', 'linker', 'scientist'];
 var listOfLDC = ['localBuilder'];
 
 StructureSpawn.prototype.spawnCreepsIfNecessary =
