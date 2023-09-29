@@ -17,7 +17,7 @@ module.exports = {
             let target;
             for (let lab of labs) {
                 var memory = Memory.rooms[creep.room.name].structures.labs[lab.id]
-                if(memory.state == 'sending' && memory.materialType == materialType) {
+                if(memory.state == 'sending' && memory.mineralType == mineralType) {
                     target = Game.findObjectById(lab.id);
                     break;
                 }       
