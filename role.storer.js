@@ -12,7 +12,7 @@ module.exports = {
             const labs = creep.room.find(FIND_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_LAB});
             var target
             for (let lab of labs) {
-                var memory = Memory.rooms[creep.room].structures.labs[lab.id]
+                var memory = Memory.rooms[creep.room.name].structures.labs[lab.id]
                 if (memory.meniralType == mineralType) {
                     target = lab;
                     break;
