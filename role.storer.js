@@ -13,7 +13,7 @@ module.exports = {
             var target
             for (let lab of labs) {
                 var memory = Memory.rooms[creep.room.name].structures.labs[lab.id]
-                if (memory.meniralType == mineralType) {
+                if (memory.mineralType == mineralType) {
                     target = lab;
                     break;
                 }
