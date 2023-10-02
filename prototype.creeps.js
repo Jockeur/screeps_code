@@ -14,6 +14,7 @@ var roles = {
     claimer: require('role.claimer'),
     dealer: require('role.dealer'),
     linker: require('role.linker'),
+    storer: require('role.storer'),
     miner: require('role.miner'),
     lorry: require('role.lorry'),
 };

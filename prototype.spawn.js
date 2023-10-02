@@ -1,4 +1,4 @@
-var listOfRoles = ['harvester', 'lorry', 'dealer', 'claimer', 'upgrader', 'repairer', 'factorer', 'builder', 'wallRepairer', 'miner', 'excavator', 'mineralLorry', 'linker', 'scientist'];
+var listOfRoles = ['harvester', 'lorry', 'dealer', 'claimer', 'upgrader', 'repairer', 'factorer', 'builder', 'storer', 'wallRepairer', 'miner', 'excavator', 'mineralLorry', 'linker', 'scientist'];
 var listOfLDC = ['localBuilder'];
 
 StructureSpawn.prototype.spawnCreepsIfNecessary =
@@ -101,6 +101,19 @@ StructureSpawn.prototype.spawnCreepsIfNecessary =
 
                 if (nbScientist[mineralType] < this.memory.minCreeps.scientist[mineralType]) {
                     name = this.spawnLorry(maxEnergy, 'scientist' + Game.time, 'scientist', mineralType);
+                }
+            }
+        }
+
+        let nbStorer = {};
+        if (name == undefined) {
+            for (let mineralType in this.memory.minCreeps.storer) {
+                nbStorer[mineralType] = _.sum(creepsInRoom, (c) =>
+                    c.memory.role == 'storer' &&
+                    c.memory.mineralType == mineralType);
+
+                if (nbStorer[mineralType] < this.memory.minCreeps.storer[mineralType]) {
+                    name = this.spawnLorry(maxEnergy, 'storer' + Game.time, 'storer', mineralType);
                 }
             }
         }
