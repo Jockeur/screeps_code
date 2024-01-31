@@ -13,7 +13,7 @@ module.exports.loop = function() {
     var harvesters = _.sum(Game.creeps, (c) => c.memory.role == 'harvester')
 
     if(harvesters < minHarvester) {
-        Game.spawns.Spawn1.spawnCreep([WORK, WORK, CARRY, MOVE], 'harvester' + Game.time, {role: 'harvester', working: false});
+        Game.spawns.Spawn1.spawnCreep([WORK, WORK, CARRY, MOVE], 'harvester' + Game.time, {memory: {role: 'harvester', working: false}});
     }
 
 }
