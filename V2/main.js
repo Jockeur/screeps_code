@@ -1,4 +1,4 @@
-var roleHarvester = require('role.harvester.js')
+var roleHarvester = require('role.harvester')
 
 module.exports.loop = function() {
 
