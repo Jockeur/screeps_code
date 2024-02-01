@@ -24,7 +24,7 @@ module.exports.loop = function() {
     if(harvesters < minHarvester) {
         Game.spawns.Spawn1.spawnCreep([WORK, WORK, CARRY, MOVE], 'harvester' + Game.time, {memory: {role: 'harvester', working: false}});
     } else if (upgraders < minUpgrader) {
-        Game.spawns.Spawn1.spawnCreep([WORK, WORK, CARRY, MOVE], {memory: {role: 'upgrader', working: false}});
+        Game.spawns.Spawn1.spawnCreep([WORK, WORK, CARRY, MOVE], 'upgrader' + Game.time, {memory: {role: 'upgrader', working: false}});
     }
 
 }
